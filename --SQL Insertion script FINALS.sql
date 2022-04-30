@@ -35,7 +35,7 @@ INSERT INTO ORDERS(Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Sta
     ("2022-01-23",'4567','Diddy Kongs Treehouse, Donkey Kong Island', '458794','S','120','angry that we dont sell bananas', 4),
     ("2022-04-10",'5678','The Gates of Hell, Inferno adjacent,', '135790', 'S','300', 'Shes a NUN???', 5); 
 
-INSERT INTO ORDER_HAS_PRODUCTS(Order_ID, Product_ID, QTY) VALUES
+INSERT INTO ORDER_PRODUCTS(Order_ID, Product_ID, QTY) VALUES
     (1, 2, 3),
     (1, 5, 1), 
     (2, 2, 2), 
