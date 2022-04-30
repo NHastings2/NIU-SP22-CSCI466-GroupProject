@@ -1,0 +1,40 @@
+N.E.D
+ER DIAGRAM EXPLANATION
+
+CUSTOMER- represents shop customer
+	Customer_id is the primary key. Personal information isn’t used as the primary key due to lack 
+of uniqueness and possibility of duplication, even with an intersection of multiple personal identifiers. 
+	Customer_name used to personalize shopping experience. 
+
+ORDER- represents order placed by customer
+	Order_id is the primary key. Date/time isn’t used nor any other identifier due to the possibility 
+of two identical orders occurring in the same exact time.
+	Customer_id is the foreign key. It connects customer to their order.	
+       Date- used to keep track of when order was placed to ensure that shipping occurs in a timely 
+manner. 
+       Product_Id is the foreign key that connects order to products.
+       CC_num- customers billing info
+	Shipping_address- indicates where order is shipped to.
+	Tracking_number- gives both the user and employee the ability to track the order once shipped
+	Order_Status indicates status of order. Shipped or Processing
+	Total_Cost- total cost of the order
+	Notes- can be left blank! Notes set by employees about an order
+	
+
+PRODUCTS- represents products sold by store and bought by the customer
+	Product_ID is the primary key. Name can’t be used because two products could have the same 
+name but different sizes/colors/ etc. 
+	Product_name is the name of the product.
+	Product_in_stock is the quantity of the product
+	Product_Cost is the cost of the product(for the customer)
+
+	
+Relationships-
+       has- is a binary many to many relationship between Order and Products. It keeps track of what 
+products constitute an order, as well as the effect an order has on product inventory. An Order can have 
+many products and an instance of a product may exist in many orders. Has has a relationship attribute-
+quantity that keeps track of the quantity of a product that is in an order.
+pays for- is a binary 1 to many relationship between Customer and Order. It keeps track of what order 
+belongs to what customer.
+
+

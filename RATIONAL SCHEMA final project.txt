@@ -1,0 +1,42 @@
+ Final project, ER Conversion/normalization
+
+1.	Handle all entities
+a.	strong entities that are not subtypes
+
+   CUSTOMER (Customer_ID, Customer_Name)
+ORDER (Order_ID, Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, 
+Total_Cost, Notes)
+   PRODUCT (Product_ID, Product_Name, Product_in_Stock, Product_Cost)
+b.	no subtypes
+c.	no weak entities
+d.	Customer_ID?, Product_ID?
+
+2.	Handle all the relationships
+a.	Binary one-to-one relationships
+i.	There are none in the ER diagram.
+b.	Binary one-to-many relationships
+i.	pays for is a binary one-to-many relationship between CUSTOMER and ORDER
+ORDER (Order_ID, Date, CC_Num, Shipping_Address, Tracking_Num, 
+Order_Status, Total_Cost, Notes, Customer_ID?)
+Customer_ID? is the foreign key that connects Order to Customer.
+
+c.	Binary many-to-many relationships
+i.	has is a binary many-to-many relationship between PRODUCT and ORDER    
+
+ORDER_PRODUCTS (Order_ID?, Product_ID?, quantity)
+Order_ID?, Product_ID? are the foreign keys that point to ORDER and PRODUCT 
+respectively.
+d.	No recursive relationships
+
+
+
+
+
+3.	RELATIONAL SCHEMA- COMPLETED
+
+   CUSTOMER (Customer_ID, Customer_Name)
+   PRODUCT (Product_ID, Product_Name, Product_in_Stock, Product_Cost)
+   ORDER (Order_ID, Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, 
+Total_Cost, Notes, Customer_ID?)
+   ORDER_HAS_PRODUCTS (Order_ID?, Product_ID?, quantity)
+	
