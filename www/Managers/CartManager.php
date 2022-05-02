@@ -1,8 +1,14 @@
 <?php
 
+include 'functions.php';
+
 session_start();
 
+if(!isset($_SESSION["CART"]))
+    $_SESSION["CART"] = array();
+
 $cart = $_SESSION["CART"];
+header('Content-type:application/json;charset=utf-8');
 
 $method = $_SERVER['REQUEST_METHOD'];
 if($method == 'GET')
@@ -11,41 +17,75 @@ if($method == 'GET')
 }
 elseif ($method == 'POST')
 {
-    $productID = $_POST['ProductID'];
-    $quantity = $_POST['Quantity'];
+    checkVariable('Action');
+    $action = $_POST['Action'];
 
-    $productData = array("productID" => $productID, "quantity" => $quantity);
-    array_push($cart, $productData);
+    if($action == "Add")
+    {
+        checkVariable('ProductID');
+        checkVariable('Quantity');
 
-    $_SESSION["CART"] = $cart;
-}
-elseif ($method == 'PATCH')
-{
-    $productID = $_POST['ProductID'];
-    $quantity = $_POST['Quantity'];
+        $productID = $_POST['ProductID'];
+        $quantity = $_POST['Quantity'];
 
-    foreach ($cart as $item) {
-        if($item['productID'] == $productID)
-            $item['quantity'] = $quantity;
+        $found = false;
+        foreach ($cart as $key => $item) {
+            if($item['productID'] == $productID)
+            {
+                $cart[$key]['quantity'] = $item['quantity'] + $quantity; 
+                $found = true;
+            }
+        }
+
+        if(!$found)
+        {
+            $productData = array("productID" => $productID, "quantity" => $quantity);
+            array_push($cart, $productData);
+        }
     }
+    elseif($action == "Update")
+    {
+        checkVariable('ProductID');
+        checkVariable('Quantity');
 
-    $_SESSION["CART"] = $cart;
-}
-else if($method == 'DELETE')
-{
-    $productID = $_GET['ProductID'];
+        $productID = $_POST['ProductID'];
+        $quantity = $_POST['Quantity'];
 
-    foreach ($cart as $item) {
-        if($item['productID'] == $productID)
-            unset($cart[$item]);
+        foreach ($cart as $key => $item) {
+            if($item['productID'] == $productID)
+                $cart[$key]['quantity'] = $quantity;
+        }
     }
+    elseif($action == "Remove")
+    {
+        checkVariable('ProductID');
 
-    $_SESSION["CART"] = $cart;
+        $productID = $_POST['ProductID'];
+
+        foreach ($cart as $key => $item) {
+            if($item['productID'] == $productID)
+                unset($cart[$key]);
+        }
+    }
+    elseif($action == "Clear")
+    {
+        foreach($cart as $key => $item)
+            unset($cart[$key]);
+    }
+    else 
+    {
+        $data = array('error' => "Unknown 'Action'" );
+    }
 }
 
-header('Content-type:application/json;charset=utf-8');
+$data = $cart;
+$_SESSION["CART"] = $cart;
 echo json_encode($data);
 
-session_write_close();
+if(isset($_POST["Redirect"]) && !empty($_POST["Redirect"]))
+{
+    $redirect = $_POST["Redirect"];
+    header("Location:$redirect");
+}
 
 ?>
