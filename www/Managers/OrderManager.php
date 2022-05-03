@@ -20,7 +20,7 @@ if($method == "GET")
 {
     if(isset($_POST["ID"]) && !empty($_POST['ID']))
     {
-        $sql = "SELECT * FROM ORDER WHERE Order_ID = ?";
+        $sql = "SELECT * FROM ORDERS WHERE Order_ID = ?";
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute([$_GET['ID']]);
@@ -33,7 +33,7 @@ if($method == "GET")
     }
     elseif (isset($_POST["CustomerID"]) && !empty($_POST['CustomerID'])) 
     {
-        $sql = "SELECT * FROM ORDER WHERE Customer_ID = ?";
+        $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ?";
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute([$_GET['CustomerID']]);
@@ -46,7 +46,7 @@ if($method == "GET")
     }
     else 
     {
-        $sql = "SELECT * FROM ORDER";
+        $sql = "SELECT * FROM ORDERS";
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute();
