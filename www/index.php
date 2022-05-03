@@ -7,7 +7,8 @@
 </form>
 
 <?php
-    $time = time();
+    date_default_timezone_set("America/Chicago");
+    $time = time('h:mm:ss');
     echo $time;
     $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
 
@@ -20,7 +21,7 @@
     }
     
     $resp = curl_exec($curl);
-    $endTime = time();
+    $endTime = time('h:mm:ss');
     echo $endTime;
     $json = json_decode($resp, true);
     
