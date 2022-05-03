@@ -7,7 +7,7 @@
 </form>
 
 <?php
-    sleep(1);
+    //sleep(1);
     $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
 
     $curl = curl_init($url);
