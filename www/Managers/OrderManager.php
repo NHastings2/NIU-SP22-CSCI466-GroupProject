@@ -41,7 +41,7 @@ if($method == "GET")
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     {
         $result = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
-        $data = $rows;
+        $data = $result;
 
         // $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ?";
         // try {
@@ -56,7 +56,8 @@ if($method == "GET")
     }
     else 
     {
-        $result = ExecuteSQL("SELECT * FROM ORDERS")
+        $result = ExecuteSQL("SELECT * FROM ORDERS");
+        $data = $result;
 
         // $sql = "SELECT * FROM ORDERS";
         // try {
