@@ -86,7 +86,7 @@ elseif($method == "POST")
         $ID = $_POST['ID'];
         $Quantity = $_POST['Quantity'];
 
-        $sql = "UPDATE PRODUCT SET Product_in_stock=? WHERE id=?";
+        $sql = "UPDATE PRODUCT SET Product_in_stock=? WHERE Product_ID=?";
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute(array($Quantity, $ID));
