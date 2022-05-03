@@ -23,19 +23,19 @@
 
     //print_r($resp);
 
-    $json = json_decode($resp, true);
+    //$json = json_decode($resp, true);
     
     //print_r($resp);
-    if(!empty($json))
-    {
-        foreach ($json as $key => $value) 
-        {
-            echo "Product: ";
-            echo $value["productID"];
-            echo " - Quantity: ";
-            echo $value["quantity"];
-            echo "<br>";
-        }
-    }   
+    // if(!empty($json))
+    // {
+    //     foreach ($json as $key => $value) 
+    //     {
+    //         echo "Product: ";
+    //         echo $value["productID"];
+    //         echo " - Quantity: ";
+    //         echo $value["quantity"];
+    //         echo "<br>";
+    //     }
+    // }   
     
 ?>
