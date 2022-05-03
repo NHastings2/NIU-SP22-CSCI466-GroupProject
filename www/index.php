@@ -7,21 +7,30 @@
 </form>
 
 <?php
-    //sleep(1);
-    $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
+    include '/Managers/functions/php';
 
-    $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_TIMEOUT, 1);
-    if(isset($_COOKIE['PHPSESSID']))
-    {
-        $SESSID = $_COOKIE['PHPSESSID'];
-        curl_setopt($curl, CURLOPT_COOKIE, "PHPSESSID=$SESSID");
-    }
+    start_session();
+    $cookies = array(
+        {
+            'Key' => 'PHPSESSID',
+            'Value' => $_COOKIE['PHPSESSID'];
+        });
+    $cart = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'GET', )
+
+    // //sleep(1);
+    // $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
+
+    // $curl = curl_init($url);
+    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    // if(isset($_COOKIE['PHPSESSID']))
+    // {
+    //     $SESSID = $_COOKIE['PHPSESSID'];
+    //     curl_setopt($curl, CURLOPT_COOKIE, "PHPSESSID=$SESSID");
+    // }
     
-    $resp = curl_exec($curl);
+    // $resp = curl_exec($curl);
 
-    print_r($resp);
+    print_r($cart);
 
     //$json = json_decode($resp, true);
     

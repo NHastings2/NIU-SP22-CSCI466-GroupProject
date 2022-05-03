@@ -4,6 +4,10 @@ include '/home/data/www/z1929228/php.inc/secrets.php';
 include 'functions.php';
 $dbname = 'z1929228';
 
+function gen_uid($l=5){
+    return substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 10, $l);
+ }
+
 try {
     $dsn = "mysql:host=$host;dbname=$dbname";
     $pdo = new PDO($dsn, $username, $password);
@@ -60,7 +64,43 @@ if($method == "GET")
 }
 else if($method == "POST")
 {
+    checkVariable('Action');
 
+    $action = $_POST['Action'];
+    if($action == "Create")
+    {
+        date_default_timezone_set('America/Chicago');
+
+        checkVariable('CC_Num');
+        checkVariable('ShippingAddress');
+        checkVariable('CustomerID');
+
+        $orderDate = date('Y-m-d');
+        $CCNum = $_POST['CC_Num'];
+        $ShippingAddress = $_POST['ShippingAddress'];
+        $TrackingNum = gen_uid(10);
+        $OrderStatus = "P";
+        $Customer_ID = $_POST["CustomerID"];
+
+        $cookies = array(
+            {
+                'Key' => 'PHPSESSID',
+                'Value' => $_COOKIE['PHPSESSID']
+            });
+        $currentCart = GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET", $cookies);
+
+        $sql = "INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);";
+        try {
+            $statement = $pdo->prepare($sql);
+            $statement->execute(array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, , $Customer_ID));
+        } catch (PDOexception $e) {
+            echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
+        }
+    }
+    elseif ($action == "Update") 
+    {
+        
+    }
 }
 
 echo json_encode($data);
