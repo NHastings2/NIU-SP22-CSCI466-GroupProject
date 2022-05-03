@@ -9,15 +9,7 @@
 <?php
     include 'Managers/functions.php';
 
-    session_start();
-    $cookies = array(
-        [0] => array(
-        
-            'Key' => 'PHPSESSID',
-            'Value' => $_COOKIE['PHPSESSID'],
-        ),
-    );
-    $cart = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'GET', $cookies);
+    $cart = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'GET');
 
     // //sleep(1);
     // $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
