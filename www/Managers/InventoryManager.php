@@ -80,6 +80,8 @@ elseif($method == "POST")
     }
     elseif($action == "Update")
     {
+        checkVariable('ID');
+        
         
     }
     else
