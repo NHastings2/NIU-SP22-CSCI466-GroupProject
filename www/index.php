@@ -7,8 +7,6 @@
 </form>
 
 <?php
-    date_default_timezone_set("America/Chicago");
-    $time = microtime();
     $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
 
     $curl = curl_init($url);
@@ -21,9 +19,6 @@
     }
     
     $resp = curl_exec($curl);
-    $endTime = microtime() - $time;
-    echo "<br>";
-    echo $endTime;
 
     $json = json_decode($resp, true);
     
