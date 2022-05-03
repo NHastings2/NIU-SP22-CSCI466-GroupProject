@@ -10,13 +10,12 @@
     include 'Managers/functions.php';
 
     session_start();
-    $sessCookie = $_COOKIE['PHPSESSID'];
     $cookies = array(
         [0] => array(
         
             'Key' => 'PHPSESSID',
-            'Value' => $sessCookie
-        )
+            'Value' => $_COOKIE['PHPSESSID'],
+        ),
     );
     $cart = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'GET', $cookies);
 
