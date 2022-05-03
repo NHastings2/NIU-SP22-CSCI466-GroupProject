@@ -24,7 +24,6 @@ if($method == "GET")
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute([$_GET['ID']]);
-            print_r($statement);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOexception $e) {
             die("        <p>Query failed: ${$e->getMessage()}</p>\n");
@@ -61,10 +60,10 @@ elseif($method == "POST")
         $Quantity = $_POST['Quantity'];
         $Cost = $_POST['Cost'];
 
-        $sql = "INSERT INTO PRODUCT (Product_Name, Product_in_Stock, Product_Cost) VALUES ('?','?','?');";
+        $sql = "INSERT INTO PRODUCT (Product_Name, Product_in_Stock, Product_Cost) VALUES (':name',':quantity',':cost');";
         try {
             $statement = $pdo->prepare($sql);
-            $statement->execute([$Name, $Quantity, $Cost]);
+            $statement->execute([':name' => $Name, ':quantity' => $Quantity, ':cost' => $Cost]);
             
         } catch (PDOexception $e) {
             echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
