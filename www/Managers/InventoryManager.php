@@ -24,6 +24,7 @@ if($method == "GET")
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute([$_GET['ID']]);
+            print_r($statement);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOexception $e) {
             die("        <p>Query failed: ${$e->getMessage()}</p>\n");
@@ -37,7 +38,6 @@ if($method == "GET")
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute();
-            print_r($statement);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOexception $e) {
             die("        <p>Query failed: ${$e->getMessage()}</p>\n");
