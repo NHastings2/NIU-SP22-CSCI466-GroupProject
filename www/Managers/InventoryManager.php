@@ -65,7 +65,7 @@ elseif($method == "POST")
             $statement = $pdo->prepare($sql);
             $statement->execute([$Name, $Quantity, $Cost]);
         } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+            echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
         }
 
         $sql = "SELECT * FROM PRODUCT;";
@@ -77,9 +77,6 @@ elseif($method == "POST")
         } catch (PDOexception $e) {
             die("        <p>Query failed: ${$e->getMessage()}</p>\n");
         }
-
-       
-    
     }
     elseif($action == "Update")
     {
