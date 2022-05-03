@@ -18,7 +18,7 @@ $data = "";
 $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
-    if(isset($_POST["ID"]) && !empty($_POST['ID']))
+    if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
         $sql = "SELECT * FROM ORDERS WHERE Order_ID = ?";
         try {
@@ -31,7 +31,7 @@ if($method == "GET")
 
         $data = $rows;
     }
-    elseif (isset($_POST["CustomerID"]) && !empty($_POST['CustomerID'])) 
+    elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     {
         $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ?";
         try {
