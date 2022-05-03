@@ -22,7 +22,7 @@ function GetData(string $URL, string $method, array $cookies=NULL, array $postPa
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($postPayload));
     }
 
-    if(isset($_COOKIE['PHPSESSID']) && !empty($_COOKIE[PHPSESSID]))
+    if(isset($_COOKIE['PHPSESSID']) && !empty($_COOKIE['PHPSESSID']))
     {
         $PHPSESS = $_COOKIE['PHPSESSID'];
         curl_setopt($curl, CURLOPT_COOKIE, "PHPSESSID=$PHPSESS");
