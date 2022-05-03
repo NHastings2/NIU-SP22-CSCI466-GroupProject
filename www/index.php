@@ -22,19 +22,21 @@
     $resp = curl_exec($curl);
     curl_close($curl);
 
-    $json = json_decode($resp, true);
+    print_r($resp);
+
+    // $json = json_decode($resp, true);
     
-    //print_r($resp);
-    if(!empty($json))
-    {
-        foreach ($json as $key => $value) 
-        {
-            echo "Product: ";
-            echo $value["productID"];
-            echo " - Quantity: ";
-            echo $value["quantity"];
-            echo "<br>";
-        }
-    }   
+    // //print_r($resp);
+    // if(!empty($json))
+    // {
+    //     foreach ($json as $key => $value) 
+    //     {
+    //         echo "Product: ";
+    //         echo $value["productID"];
+    //         echo " - Quantity: ";
+    //         echo $value["quantity"];
+    //         echo "<br>";
+    //     }
+    // }   
     
 ?>
