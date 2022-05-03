@@ -42,4 +42,27 @@ function GetData(string $URL, string $method, array $cookies=NULL, array $postPa
     echo $resp;
 }
 
+function ExecuteSQL(string $Command, array $data=array())
+{
+    include '/home/data/www/z1929228/php.inc/secrets.php';
+    $dbname = 'z1929228';
+
+    try {
+        $dsn = "mysql:host=$host;dbname=$dbname";
+        $pdo = new PDO($dsn, $username, $password);
+    } catch (PDOexception $e) {
+        die("        <p>Connection to database failed: ${$e->getMessage()}</p>\n");
+    }
+
+    try {
+        $statement = $pdo->prepare($Command);
+        $statement->execute($data);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOexception $e) {
+        die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+    }
+
+    echo $rows;
+}
+
 ?>

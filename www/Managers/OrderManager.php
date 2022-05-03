@@ -24,42 +24,50 @@ if($method == "GET")
 {
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $sql = "SELECT * FROM ORDERS WHERE Order_ID = ?";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute([$_GET['ID']]);
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }
+        $result = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
+        $data = $result;
 
-        $data = $rows;
+        // $sql = "SELECT * FROM ORDERS WHERE Order_ID = ?";
+        // try {
+        //     $statement = $pdo->prepare($sql);
+        //     $statement->execute([$_GET['ID']]);
+        //     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        // } catch (PDOexception $e) {
+        //     die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+        // }
+
+        // $data = $rows;
     }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     {
-        $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ?";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute([$_GET['CustomerID']]);
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }
-
+        $result = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
         $data = $rows;
+
+        // $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ?";
+        // try {
+        //     $statement = $pdo->prepare($sql);
+        //     $statement->execute([$_GET['CustomerID']]);
+        //     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        // } catch (PDOexception $e) {
+        //     die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+        // }
+
+        // $data = $rows;
     }
     else 
     {
-        $sql = "SELECT * FROM ORDERS";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute();
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }
+        $result = ExecuteSQL("SELECT * FROM ORDERS")
 
-        $data = $rows;
+        // $sql = "SELECT * FROM ORDERS";
+        // try {
+        //     $statement = $pdo->prepare($sql);
+        //     $statement->execute();
+        //     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        // } catch (PDOexception $e) {
+        //     die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+        // }
+
+        // $data = $rows;
     }
 }
 else if($method == "POST")
@@ -82,20 +90,44 @@ else if($method == "POST")
         $OrderStatus = "P";
         $Customer_ID = $_POST["CustomerID"];
 
-        $cookies = array(
-            {
-                'Key' => 'PHPSESSID',
-                'Value' => $_COOKIE['PHPSESSID']
-            });
-        $currentCart = GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET", $cookies);
+        $Order_Total = 0;
+        $currentCart = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET"));
+        foreach ($currentCart as $key => $item) {
+            $itemID = $item["productID"];
+            $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"));
+
+            $Order_Total += ($storeItem['Product_Cost'] * $item['quantity']);
+        }
 
         $sql = "INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);";
         try {
             $statement = $pdo->prepare($sql);
-            $statement->execute(array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, , $Customer_ID));
+            $statement->execute(array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID));
         } catch (PDOexception $e) {
             echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
         }
+
+        $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;";
+        try {
+            $statement = $pdo->prepare($sql);
+            $statement->execute(array($Customer_ID));
+            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $data = $rows;
+        } catch (PDOexception $e) {
+            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+        }   
+
+        $orderID = $rows[0]['Order_ID'];
+        foreach ($currentCart as $key => $item) {
+            $sql = "INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)";
+            try {
+                $statement = $pdo->prepare($sql);
+                $statement->execute(array($orderID, $item['productID'], $item['quantity']));
+            } catch (PDOexception $e) {
+                echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
+            }
+        }
+
     }
     elseif ($action == "Update") 
     {
