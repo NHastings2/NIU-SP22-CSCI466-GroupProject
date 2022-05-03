@@ -11,7 +11,6 @@
     $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
 
     $curl = curl_init($url);
-    curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     if(isset($_COOKIE['PHPSESSID']))
     {
