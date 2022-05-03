@@ -37,6 +37,7 @@ if($method == "GET")
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute();
+            print_r($statement);
             $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOexception $e) {
             die("        <p>Query failed: ${$e->getMessage()}</p>\n");
@@ -64,7 +65,7 @@ elseif($method == "POST")
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute([$Name, $Quantity, $Cost]);
-            print_r($statement);
+            
         } catch (PDOexception $e) {
             echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
         }
