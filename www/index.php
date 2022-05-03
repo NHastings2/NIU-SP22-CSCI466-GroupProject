@@ -19,6 +19,7 @@
     }
     
     $resp = curl_exec($curl);
+    curl_close($curl);
 
     $json = json_decode($resp, true);
     
@@ -34,5 +35,5 @@
             echo "<br>";
         }
     }   
-    curl_close($curl);
+    
 ?>
