@@ -9,7 +9,7 @@
 <?php
     include 'Managers/functions.php';
 
-    start_session();
+    session_start();
     $cookies = array(
         [0] => array(
         
