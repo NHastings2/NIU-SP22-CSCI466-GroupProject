@@ -18,6 +18,7 @@
         curl_setopt($curl, CURLOPT_COOKIE, "PHPSESSID=$SESSID");
     }
     
+    echo "Test";
     $resp = curl_exec($curl);
     $json = json_decode($resp, true);
     //print_r($resp);
