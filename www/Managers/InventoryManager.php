@@ -81,8 +81,28 @@ elseif($method == "POST")
     elseif($action == "Update")
     {
         checkVariable('ID');
-        
-        
+        checkVariable('Quantity');
+
+        $ID = $_POST['ID'];
+        $Quantity = $_POST['Quantity'];
+
+        $sql = "UPDATE PRODUCT SET Product_in_stock=? WHERE id=?";
+        try {
+            $statement = $pdo->prepare($sql);
+            $statement->execute(array($Quantity, $ID));
+        } catch (PDOexception $e) {
+            echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
+        }
+
+        $sql = "SELECT * FROM PRODUCT;";
+        try {
+            $statement = $pdo->prepare($sql);
+            $statement->execute();
+            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $data = $rows;
+        } catch (PDOexception $e) {
+            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
+        }       
     }
     else
     {
