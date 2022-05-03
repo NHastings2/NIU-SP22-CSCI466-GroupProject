@@ -7,7 +7,8 @@
 </form>
 
 <?php
-    //define("MAX_CACHE_LIFETIME", 0);
+    $time = time();
+    echo $time;
     $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
 
     $curl = curl_init($url);
@@ -18,9 +19,11 @@
         curl_setopt($curl, CURLOPT_COOKIE, "PHPSESSID=$SESSID");
     }
     
-    echo "Test";
     $resp = curl_exec($curl);
+    $endTime = time();
+    echo $endTime;
     $json = json_decode($resp, true);
+    
     //print_r($resp);
     if(!empty($json))
     {
