@@ -64,6 +64,7 @@ elseif($method == "POST")
         try {
             $statement = $pdo->prepare($sql);
             $statement->execute([$Name, $Quantity, $Cost]);
+            print_r($statement);
         } catch (PDOexception $e) {
             echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
         }
