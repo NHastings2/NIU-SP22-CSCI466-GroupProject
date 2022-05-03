@@ -11,10 +11,12 @@
 
     start_session();
     $cookies = array(
-        {
+        [0] => array(
+        
             'Key' => 'PHPSESSID',
             'Value' => $_COOKIE['PHPSESSID'];
-        });
+        )
+    );
     $cart = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'GET', )
 
     // //sleep(1);
