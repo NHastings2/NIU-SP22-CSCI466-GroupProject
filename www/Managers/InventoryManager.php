@@ -63,8 +63,7 @@ elseif($method == "POST")
         $sql = "INSERT INTO PRODUCT (Product_Name, Product_in_Stock, Product_Cost) VALUES (':name',':quantity',':cost');";
         try {
             $statement = $pdo->prepare($sql);
-            $statement->execute([':name' => $Name, ':quantity' => $Quantity, ':cost' => $Cost]);
-            
+            $statement->execute(array(':name' => $Name, ':quantity' => $Quantity, ':cost' => $Cost));
         } catch (PDOexception $e) {
             echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
         }
