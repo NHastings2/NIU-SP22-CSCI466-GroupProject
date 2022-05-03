@@ -7,7 +7,7 @@
 </form>
 
 <?php
-    include '/Managers/functions.php';
+    include 'Managers/functions.php';
 
     start_session();
     $cookies = array(
