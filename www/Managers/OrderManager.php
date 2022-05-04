@@ -45,24 +45,31 @@ else if($method == "POST")
 
         $Order_Total = 0;
         $currentCart = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET"));
-        foreach ($currentCart as $key => $item) {
-            $itemID = $item["productID"];
-            $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"));
+        if(count($currentCart) > 0)
+        {
+            foreach ($currentCart as $key => $item) {
+                $itemID = $item["productID"];
+                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"));
 
-            $Order_Total += ($storeItem['Product_Cost'] * $item['quantity']);
+                $Order_Total += ($storeItem['Product_Cost'] * $item['quantity']);
+            }
+
+            $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
+            ExecuteSQL("INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);", $queryData);
+
+            $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;", array($Customer_ID));  
+
+            $orderID = $orderData[0]['Order_ID'];
+            foreach ($currentCart as $key => $item) {
+                ExecuteSQL("INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)", array($orderID, $item['productID'], $item['quantity']));
+            }
+
+            $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($orderID));
         }
-
-        $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
-        ExecuteSQL("INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);", $queryData);
-
-        $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;", array($Customer_ID));  
-
-        $orderID = $orderData[0]['Order_ID'];
-        foreach ($currentCart as $key => $item) {
-            ExecuteSQL("INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)", array($orderID, $item['productID'], $item['quantity']));
+        else 
+        {
+            $data = array('error' => "No Items in Cart" );
         }
-
-        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($orderID));
     }
     elseif ($action == "Update") 
     {
@@ -74,6 +81,10 @@ else if($method == "POST")
             ExecuteSQL("UPDATE ORDERS SET Order_Status=? WHERE Order_ID=?", array($_POST['Status'], $_POST['ID']));
 
         $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($_POST['ID']));
+    }
+    else 
+    {
+        $data = array('error' => "Unknown 'Action'" );
     }
 }
 
