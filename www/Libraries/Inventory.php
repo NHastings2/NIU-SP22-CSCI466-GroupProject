@@ -19,7 +19,7 @@ function CreateInventoryItem(string $name, string $quantity, string $cost)
     return GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST",  null, $postData);
 }
 
-function CreateInventoryItem(string $ID, string $quantity)
+function UpdateInventoryItem(string $ID, string $quantity)
 {
     $postData = array('Action' => 'Update', 'ID' => $ID, 'Quantity' => $quantity);
     return GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST",  null, $postData);
