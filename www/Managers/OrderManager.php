@@ -41,6 +41,8 @@ if($method == "GET")
 
         array_push($orders[$key], array('Items' => $orderItems));
     }
+
+    $data = $orders;
 }
 else if($method == "POST")
 {
