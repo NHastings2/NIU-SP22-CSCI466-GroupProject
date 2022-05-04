@@ -17,13 +17,13 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
     $orders = "";
-    if(isset($_POST["ID"]) && !empty($_POST['ID']))
+    if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_POST["ID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
     }
-    elseif (isset($_POST["CustomerID"]) && !empty($_POST['CustomerID'])) 
+    elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_POST["CustomerID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
     }
     else
     { 

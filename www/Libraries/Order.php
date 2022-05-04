@@ -10,13 +10,13 @@ function GetOrders()
 function GetOrderByID(string $ID)
 {
     $postData = array('ID' => $ID );
-    return GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/OrderManager.php', 'GET', null, $postData);
+    return GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/OrderManager.php?ID=$ID", 'GET');
 }
 
 function GetOrderByCustomerID(string $CustomerID)
 {
     $postData = array('CustomerID' => $CustomerID);
-    return GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/OrderManager.php', 'GET', null, $postData);
+    return GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/OrderManager.php?CustomerID=$CustomerID", 'GET');
 }
 
 ?>
