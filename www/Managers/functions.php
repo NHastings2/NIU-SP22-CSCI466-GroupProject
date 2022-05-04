@@ -39,7 +39,7 @@ function GetData(string $URL, string $method, array $cookies=NULL, array $postPa
     }
 
     $resp = curl_exec($curl);
-    echo $resp;
+    return $resp;
 }
 
 function ExecuteSQL(string $Command, array $data=array())
@@ -62,7 +62,7 @@ function ExecuteSQL(string $Command, array $data=array())
         die("        <p>Query failed: ${$e->getMessage()}</p>\n");
     }
 
-    echo $rows;
+    return $rows;
 }
 
 ?>
