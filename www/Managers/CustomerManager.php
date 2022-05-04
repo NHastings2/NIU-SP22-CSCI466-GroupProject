@@ -1,6 +1,6 @@
 <?php
 
-include '/home/data/www/z1929228/php.inc/secrets.php';
+include "/home/data/www/$USER/php.inc/secrets.php";
 include 'functions.php';
 
 header('Content-type:application/json;charset=utf-8');
