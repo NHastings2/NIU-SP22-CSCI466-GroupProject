@@ -30,16 +30,16 @@ if($method == "GET")
         $orders = ExecuteSQL("SELECT * FROM ORDERS");
     }
 
-    foreach ($orders as $key => $order) 
+    foreach ($orders as $orderKey => $order) 
     {
         $orderItems = array();
         $orderQuery = ExecuteSQL("SELECT * FROM ORDER_PRODUCTS WHERE Order_ID = ?", array($order['Order_ID']));
-        foreach ($orderQuery as $key => $orderItem) 
+        foreach ($orderQuery as $itemKey => $orderItem) 
         {
             array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']));
         }
 
-        array_push($key, array('Items' => $orderItems));
+        array_push($orders[$orderKey], array('Items' => $orderItems));
     }
 
     $data = $orders;
