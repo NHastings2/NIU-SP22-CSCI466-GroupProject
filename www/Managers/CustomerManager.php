@@ -24,8 +24,7 @@ elseif($method == "POST")
     {
         checkVariable('Name');
 
-        $result = ExecuteSQL("INSERT INTO CUSTOMER (Customer_Name) VALUES (?)", array($_POST['Name']));
-        print_r($result);
+        ExecuteSQL("INSERT INTO CUSTOMER (Customer_Name) VALUES (?)", array($_POST['Name']));
 
         $data = ExecuteSQL("SELECT * FROM CUSTOMER");
     }

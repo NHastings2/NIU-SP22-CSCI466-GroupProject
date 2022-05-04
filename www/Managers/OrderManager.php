@@ -17,17 +17,11 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
-    {
         $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
-    }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
-    {
         $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
-    }
     else 
-    {
         $data = ExecuteSQL("SELECT * FROM ORDERS");
-    }
 }
 else if($method == "POST")
 {
@@ -72,7 +66,14 @@ else if($method == "POST")
     }
     elseif ($action == "Update") 
     {
-        
+        checkVariable("ID");
+
+        if(isset($_POST["Notes"]) && !empty($_GET['Notes']))
+            ExecuteSQL("UPDATE ORDERS SET Notes=? WHERE Order_ID=?", array($_POST['Notes'], $_POST['ID']));
+        elseif(isset($_POST["Status"]) && !empty($_GET['Status']))
+            ExecuteSQL("UPDATE ORDERS SET Order_Status=? WHERE Order_ID=?", array($_POST['Status'], $_POST['ID']));
+
+        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($_POST['ID']));
     }
 }
 
@@ -83,6 +84,5 @@ if(isset($_POST["Redirect"]) && !empty($_POST["Redirect"]))
     $redirect = $_POST["Redirect"];
     header("Location:$redirect");
 }
-
 
 ?>

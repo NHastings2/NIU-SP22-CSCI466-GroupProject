@@ -7,9 +7,9 @@
 </form>
 
 <?php
-    include 'Managers/functions.php';
+    include 'Libraries.php';
 
-    $cart = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'GET');
+    $cart = GetCart();
 
     // //sleep(1);
     // $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
