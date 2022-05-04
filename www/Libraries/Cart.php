@@ -29,7 +29,7 @@ function RemoveToCart(string $productID)
 
 function UpdateCart(string $productID, int $quantity)
 {
-    $postData = array('Action' => 'Update', 'ProductID' => $productID, , 'Quantity' => $quantity);
+    $postData = array('Action' => 'Update', 'ProductID' => $productID, 'Quantity' => $quantity);
     $result = GetData('http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php', 'POST', null, $postData);
     return $result;
 }
