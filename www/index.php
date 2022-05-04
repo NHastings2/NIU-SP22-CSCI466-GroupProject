@@ -11,34 +11,21 @@
 
     $cart = GetCart();
 
-    // //sleep(1);
-    // $url = "http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php";
+    //print_r($cart);
 
-    // $curl = curl_init($url);
-    // curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    // if(isset($_COOKIE['PHPSESSID']))
-    // {
-    //     $SESSID = $_COOKIE['PHPSESSID'];
-    //     curl_setopt($curl, CURLOPT_COOKIE, "PHPSESSID=$SESSID");
-    // }
-    
-    // $resp = curl_exec($curl);
-
-    print_r($cart);
-
-    //$json = json_decode($resp, true);
+    $json = json_decode($cart, true);
     
     //print_r($resp);
-    // if(!empty($json))
-    // {
-    //     foreach ($json as $key => $value) 
-    //     {
-    //         echo "Product: ";
-    //         echo $value["productID"];
-    //         echo " - Quantity: ";
-    //         echo $value["quantity"];
-    //         echo "<br>";
-    //     }
-    // }   
+    if(!empty($json))
+    {
+        foreach ($json as $key => $value) 
+        {
+            echo "Product: ";
+            echo $value["productID"];
+            echo " - Quantity: ";
+            echo $value["quantity"];
+            echo "<br>";
+        }
+    }   
     
 ?>
