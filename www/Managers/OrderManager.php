@@ -16,12 +16,31 @@ $data = "";
 $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
+    $orders = "";
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
-        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
+    {
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
+    }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
-        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
-    else 
-        $data = ExecuteSQL("SELECT * FROM ORDERS");
+    { 
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
+    }
+    else
+    { 
+        $orders = ExecuteSQL("SELECT * FROM ORDERS");
+    }
+
+    foreach ($orders as $key => $order) 
+    {
+        $orderItems = array();
+        $orderQuery = ExecuteSQL("SELECT * FROM ORDER_PRODUCTS WHERE Order_ID = ?", array($order['Order_ID']));
+        foreach ($orderQuery as $key => $orderItem) 
+        {
+            array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']))
+        }
+
+        array_push($orders[$key], $orderItems);
+    }
 }
 else if($method == "POST")
 {
