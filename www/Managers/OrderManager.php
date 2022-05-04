@@ -36,7 +36,7 @@ if($method == "GET")
         $orderQuery = ExecuteSQL("SELECT * FROM ORDER_PRODUCTS WHERE Order_ID = ?", array($order['Order_ID']));
         foreach ($orderQuery as $key => $orderItem) 
         {
-            array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']))
+            array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']));
         }
 
         array_push($orders[$key], array('Items' => $orderItems));
