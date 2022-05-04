@@ -12,8 +12,6 @@
 
     $cart = GetCart();
 
-    print_r(GetOrderByID('1'));
-
     //print_r($cart);
 
     $json = json_decode($cart, true);
