@@ -4,15 +4,9 @@ include '/home/data/www/z1929228/php.inc/secrets.php';
 include 'functions.php';
 $dbname = 'z1929228';
 
-function gen_uid($l=5){
+function gen_uid($l=5)
+{
     return substr(str_shuffle("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 10, $l);
- }
-
-try {
-    $dsn = "mysql:host=$host;dbname=$dbname";
-    $pdo = new PDO($dsn, $username, $password);
-} catch (PDOexception $e) {
-   die("        <p>Connection to database failed: ${$e->getMessage()}</p>\n");
 }
 
 header('Content-type:application/json;charset=utf-8');
@@ -24,51 +18,15 @@ if($method == "GET")
 {
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $result = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
-        $data = $result;
-
-        // $sql = "SELECT * FROM ORDERS WHERE Order_ID = ?";
-        // try {
-        //     $statement = $pdo->prepare($sql);
-        //     $statement->execute([$_GET['ID']]);
-        //     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        // } catch (PDOexception $e) {
-        //     die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        // }
-
-        // $data = $rows;
+        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
     }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     {
-        $result = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
-        $data = $result;
-
-        // $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ?";
-        // try {
-        //     $statement = $pdo->prepare($sql);
-        //     $statement->execute([$_GET['CustomerID']]);
-        //     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        // } catch (PDOexception $e) {
-        //     die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        // }
-
-        // $data = $rows;
+        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
     }
     else 
     {
-        $result = ExecuteSQL("SELECT * FROM ORDERS");
-        $data = $result;
-
-        // $sql = "SELECT * FROM ORDERS";
-        // try {
-        //     $statement = $pdo->prepare($sql);
-        //     $statement->execute();
-        //     $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        // } catch (PDOexception $e) {
-        //     die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        // }
-
-        // $data = $rows;
+        $data = ExecuteSQL("SELECT * FROM ORDERS");
     }
 }
 else if($method == "POST")
@@ -100,35 +58,17 @@ else if($method == "POST")
             $Order_Total += ($storeItem['Product_Cost'] * $item['quantity']);
         }
 
-        $sql = "INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute(array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID));
-        } catch (PDOexception $e) {
-            echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
-        }
+        $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
+        ExecuteSQL("INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);", $queryData);
 
-        $sql = "SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute(array($Customer_ID));
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $data = $rows;
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }   
+        $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;", array($Customer_ID));  
 
-        $orderID = $rows[0]['Order_ID'];
+        $orderID = $orderData[0]['Order_ID'];
         foreach ($currentCart as $key => $item) {
-            $sql = "INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)";
-            try {
-                $statement = $pdo->prepare($sql);
-                $statement->execute(array($orderID, $item['productID'], $item['quantity']));
-            } catch (PDOexception $e) {
-                echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
-            }
+            ExecuteSQL("INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)", array($orderID, $item['productID'], $item['quantity']));
         }
 
+        $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($orderID));
     }
     elseif ($action == "Update") 
     {

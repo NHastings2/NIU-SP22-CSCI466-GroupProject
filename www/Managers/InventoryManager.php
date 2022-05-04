@@ -19,31 +19,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
-    {
-        $sql = "SELECT * FROM PRODUCT WHERE Product_ID = ?";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute([$_GET['ID']]);
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }
-
-        $data = $rows;
-    }
+        $data = ExecuteSQL("SELECT * FROM PRODUCT WHERE Product_ID = ?", array($_GET['ID']));
     else
-    {
-        $sql = "SELECT * FROM PRODUCT";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute();
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }
-
-        $data = $rows;
-    }
+        $data = ExecuteSQL("SELECT * FROM PRODUCT");
 }
 elseif($method == "POST")
 {
@@ -60,23 +38,10 @@ elseif($method == "POST")
         $Quantity = $_POST['Quantity'];
         $Cost = $_POST['Cost'];
 
-        $sql = "INSERT INTO PRODUCT (Product_Name, Product_in_Stock, Product_Cost) VALUES (?,?,?);";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute(array($Name, $Quantity, $Cost));
-        } catch (PDOexception $e) {
-            echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
-        }
+        $queryData = array($Name, $Quantity, $Cost);
+        ExecuteSQL("INSERT INTO PRODUCT (Product_Name, Product_in_Stock, Product_Cost) VALUES (?,?,?);", $queryData);
 
-        $sql = "SELECT * FROM PRODUCT;";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute();
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $data = $rows;
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }
+        $data = ExecuteSQL("SELECT * FROM PRODUCT");
     }
     elseif($action == "Update")
     {
@@ -86,23 +51,9 @@ elseif($method == "POST")
         $ID = $_POST['ID'];
         $Quantity = $_POST['Quantity'];
 
-        $sql = "UPDATE PRODUCT SET Product_in_stock=? WHERE Product_ID=?";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute(array($Quantity, $ID));
-        } catch (PDOexception $e) {
-            echo "        <p>Query failed: ${$e->getMessage()}</p>\n";
-        }
+        ExecuteSQL("UPDATE PRODUCT SET Product_in_Stock=? WHERE Product_ID=?", array($Quantity, $ID));
 
-        $sql = "SELECT * FROM PRODUCT;";
-        try {
-            $statement = $pdo->prepare($sql);
-            $statement->execute();
-            $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $data = $rows;
-        } catch (PDOexception $e) {
-            die("        <p>Query failed: ${$e->getMessage()}</p>\n");
-        }       
+        $data = ExecuteSQL("SELECT * FROM PRODUCT"); 
     }
     else
     {
