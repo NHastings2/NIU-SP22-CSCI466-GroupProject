@@ -39,7 +39,7 @@ if($method == "GET")
             array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']));
         }
 
-        $orders[$orderKey][] = ['Items' => $orderItems];
+        $orders[$orderKey]['Items'] = $orderItems;
     }
 
     $data = $orders;
