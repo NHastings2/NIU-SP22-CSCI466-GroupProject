@@ -8,8 +8,11 @@
 
 <?php
     include 'Libraries/Cart.php';
+    include 'Libraries/Order.php';
 
     $cart = GetCart();
+
+    print_r(GetOrderByID('1'));
 
     //print_r($cart);
 

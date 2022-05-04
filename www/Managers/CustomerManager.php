@@ -10,8 +10,8 @@ $data = "";
 $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
-    if(isset($_GET['ID']) && !empty($_GET['ID']))
-        $data = ExecuteSQL("SELECT * FROM CUSTOMER WHERE Customer_ID = ?", array($_GET['ID']));
+    if(isset($_POST['ID']) && !empty($_POST['ID']))
+        $data = ExecuteSQL("SELECT * FROM CUSTOMER WHERE Customer_ID = ?", array($_POST['ID']));
     else
         $data = ExecuteSQL("SELECT * FROM CUSTOMER");
 }

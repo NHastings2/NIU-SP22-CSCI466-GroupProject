@@ -1,16 +1,17 @@
 <?php
 
-function GetData(string $URL, string $method, array $cookies=NULL, array $postPayload=NULL)
+function GetData(string $URL, string $method, array $cookies=NULL, array $Payload=NULL)
 {
     $curl = curl_init($URL);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
     if($method == "POST")
     {
-        curl_setopt($curl, CURLOPT_POST, true);
-        if(isset($postPayload) && !empty($postPayload))
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($postPayload));
+        curl_setopt($curl, CURLOPT_POST, true);  
     }
+
+    if(isset($Payload) && !empty($Payload))
+        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($Payload));
 
     if(isset($_COOKIE['PHPSESSID']) && !empty($_COOKIE['PHPSESSID']))
     {
