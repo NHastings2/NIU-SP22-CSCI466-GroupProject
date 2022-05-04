@@ -27,6 +27,6 @@
             echo $value["quantity"];
             echo "<br>";
         }
-    }   
+    }
     
 ?>
