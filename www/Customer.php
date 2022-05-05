@@ -15,7 +15,7 @@ if (!empty($json)) {
         $ordersJson = json_decode($orders, true);
 
         if (!empty($ordersJson)) {
-            echo "<table border bordercolor=\"white\">";
+            echo "<p>Orders:</p><table border bordercolor=\"white\">";
             foreach ($ordersJson as $orderKey => $orderValue) {
                 echo "<tr><td>{$orderValue["Order_ID"]}</td>
                     <td>{$orderValue["Order_Date"]}</td>
