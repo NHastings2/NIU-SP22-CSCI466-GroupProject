@@ -17,7 +17,7 @@ if (!empty($json)) {
                 <input type=\"hidden\" name=\"ProductID\" value=\"{$value["Product_ID"]}\"/>
                 <input type=\"number\" name=\"Quantity\" placeholder=\"Quantity\" min=\"1\" max=\"{$value["Product_in_Stock"]}\"/>
                 <input type=\"submit\" value=\"Add to Cart!\"/>
-                <input type=\"hidden\" name=\"Redirect\" value=\"/Cart.php\"/></form>";
+                <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
     }
 }
 
