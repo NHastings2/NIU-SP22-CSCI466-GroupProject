@@ -13,7 +13,7 @@ jobs:
       - name: Run SSH command
         uses: garygrossgarten/github-action-ssh@v0.6.3
         with:
-          command: ls -a
+          command: /home/turing/z1929228/public_html/csci466/group_project/github/NIU-SP22-CSCI466-GroupProject/update.sh
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
