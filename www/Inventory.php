@@ -10,7 +10,7 @@ if (!empty($json)) {
     foreach ($json as $key => $value) {
         echo "<tr><td>{$value["Product_Name"]}</td>
                 <td>{$value["Product_in_Stock"]}</td>
-                <td>${$value["Product_Cost"]}</td>
+                <td>\${$value["Product_Cost"]}</td>
                 <td><a href=\"Item.php?ID={$value["Product_ID"]}\">Product page</a></td></tr>";
     }
     echo "</table>";
