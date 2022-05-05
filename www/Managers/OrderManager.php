@@ -78,7 +78,7 @@ else if($method == "POST")
                 $itemID = $item["productID"];
                 $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
-                $newStock = $storeItem['Prodoct_in_Stock'] - $item['quantity'];
+                $newStock = $storeItem['Product_in_Stock'] - $item['quantity'];
                 print($newStock);
                 $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
                 GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
