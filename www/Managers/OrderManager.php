@@ -76,11 +76,8 @@ else if($method == "POST")
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                print($itemID);
+                print("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID");
                 $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
-                if(!isset($storeItem))
-                    echo "Empty Item";
-                print_r($storeItem);
 
                 $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
                 print($newStock);
