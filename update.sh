@@ -6,4 +6,4 @@ git commit -m "Updated Core Repo"
 git push
 
 #Copy files to live area
-cp -r www/. ../../public_html/csci466/group_project/ww
+cp -r www/. ../../public_html/csci466/group_project/www
