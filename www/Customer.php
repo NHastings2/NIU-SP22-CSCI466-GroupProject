@@ -1,6 +1,7 @@
 <html><head><?php
 
-include "Libraries/Inventory.php";
+include "Libraries/Customer.php";
+include "Libraries/Order.php"
 
 $customer = GetCustomerByID($_GET["ID"]);
 $json = json_decode($customer, true);
