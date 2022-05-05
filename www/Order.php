@@ -7,7 +7,7 @@ $json = json_decode($item, true);
 
 if (!empty($json)) {
     foreach ($json as $key => $value) {
-        echo "<table><tr><td>Order number</td><td>{$value["Order_ID"]}</td>
+        echo "<table border bordercolor=\"white\"><tr><td>Order number</td><td>{$value["Order_ID"]}</td>
                 <tr><td>Ordered on</td><td>{$value["Order_Date"]}</td>
                 <tr><td>Ship to</td><td>{$value["Shipping_Address"]}</td></tr>
                 <tr><td>Tracking number</td><td>{$value["Tracking_Num"]}</td></tr>
