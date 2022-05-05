@@ -1,32 +1,24 @@
-<form method="POST" action="http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php">
-    <input type="hidden" id="Action" name="Action" value="Add">
-    <input type="hidden" id="Redirect" name="Redirect" value="http://students.cs.niu.edu/~z1929228/csci466/group_project/www/">
-    <input type="text" id="ProductID" name="ProductID"><br>
-    <input type="text" id="Quantity" name="Quantity"><br>
-    <button type="submit">Submit</button>
-</form>
+<head>
+    <title>Game Shop</title>
+</head>
+<body style="background-color:black; color:white;">
+    <h1>Game Shop</h1>
 
-<?php
-    include 'Libraries/Cart.php';
-    include 'Libraries/Order.php';
+    <h3>Inventory</h3>
+    <a href="Inventory.php">View Inventory</a>
 
-    $cart = GetCart();
+    <h3>Cart</h3>
+    <a href="Cart.php">View Cart</a>
 
-    //print_r($cart);
+    <br>
+    <br>
+    <br>
+    <br>
+    <h2>Shop Management</h2>
+    <h3>Orders</h3>
+    <a href="Orders.php">View Orders</a>
 
-    $json = json_decode($cart, true);
-    
-    //print_r($resp);
-    if(!empty($json))
-    {
-        foreach ($json as $key => $value) 
-        {
-            echo "Product: ";
-            echo $value["productID"];
-            echo " - Quantity: ";
-            echo $value["quantity"];
-            echo "<br>";
-        }
-    }
-    
-?>
+    <h3>Customers</h3>
+    <a href="Customers.php">View Customers</a>
+
+</body>
