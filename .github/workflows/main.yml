@@ -3,7 +3,8 @@
 name: Update Website
 
 # Controls when the workflow will run
-on: push
+on:
+  workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -13,7 +14,7 @@ jobs:
       - name: Run SSH command
         uses: garygrossgarten/github-action-ssh@v0.6.3
         with:
-          command: /home/turing/z1929228/public_html/csci466/group_project/github/NIU-SP22-CSCI466-GroupProject/update.sh
+          command: public_html/csci466/group_project/github/NIU-SP22-CSCI466-GroupProject/update.sh
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
