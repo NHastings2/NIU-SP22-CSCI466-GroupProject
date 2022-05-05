@@ -1,4 +1,4 @@
-<html><head><title>Game Shop</title></head><body style="background-color:black; color:white;"><?php
+<html><head><title>Game Shopping Cart</title></head><body style="background-color:black; color:white;"><?php
 
 include "Libraries/Inventory.php";
 include "Libraries/Cart.php";
@@ -35,7 +35,7 @@ if (!empty($json)) {
         }
     }
     echo "</table>";
-    echo "Your current order will cost \$$totalCost<form method=\"POST\" action=\"./Managers/OrderManager.php\">
+    echo "<br/>Your current order will cost \$$totalCost<form method=\"POST\" action=\"./Managers/OrderManager.php\">
             <input type=\"hidden\" name=\"Action\" value=\"Create\"/>
             <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 CC digits\"/>
             <input type=\"text\" name=\"ShippingAddress\" placeholder=\"Shipping address\"/>
