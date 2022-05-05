@@ -43,7 +43,7 @@ if (!empty($json)) {
             <input type=\"submit\" value=\"Order!\"/>
             <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
 } else {
-    echo "You have no items in your cart!"
+    echo "You have no items in your cart!";
 }
 
 ?></body></html>

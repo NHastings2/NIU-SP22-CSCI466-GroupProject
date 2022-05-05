@@ -15,7 +15,7 @@ if (!empty($json)) {
     }
     echo "</table>";
 } else {
-    echo "The inventory is empty!"
+    echo "The inventory is empty!";
 }
 
 ?></body></html>

@@ -20,7 +20,7 @@ if (!empty($json)) {
                 <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
     }
 } else {
-    echo "That item does not exist!"
+    echo "That item does not exist!";
 }
 
 ?></body></html>
