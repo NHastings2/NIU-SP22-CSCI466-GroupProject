@@ -19,15 +19,15 @@ if($method == "GET")
     $orders = "";
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY Order_Date DESC", array($_GET["ID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY Order_Status, Order_Date DESC", array($_GET["ID"]));
     }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC", array($_GET["CustomerID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Status, Order_Date DESC LIMIT 50", array($_GET["CustomerID"]));
     }
     else
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS ORDER BY Order_Date DESC");
+        $orders = ExecuteSQL("SELECT * FROM ORDERS ORDER BY Order_Status, Order_Date DESC LIMIT 50");
     }
 
     foreach ($orders as $orderKey => $order) 
@@ -76,23 +76,21 @@ else if($method == "POST")
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                $storeItems = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
+                $storeItem = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
-                foreach ($storeItems as $iKey => $storeItem) {
-                    $newStock = $storeItem['Product_in_Stock'] - $item['quantity'];
-                    print($newStock);
-                    $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
-                    GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
+                $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
+                print($newStock);
+                $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
+                GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
 
-                    $Order_Total += ($storeItem["Product_Cost"] * $item["quantity"]);
-                    print($Order_Total);
-                }
+                $Order_Total += ($storeItem[0]["Product_Cost"] * $item["quantity"]);
+                print($Order_Total);
             }
 
             $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
             ExecuteSQL("INSERT INTO ORDERS (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);", $queryData);
 
-            $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;", array($Customer_ID));  
+            $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_ID DESC LIMIT 1;", array($Customer_ID));  
 
             $orderID = $orderData[0]['Order_ID'];
             foreach ($currentCart as $key => $item) {
@@ -113,9 +111,9 @@ else if($method == "POST")
     {
         checkVariable("ID");
 
-        if(isset($_POST["Notes"]) && !empty($_GET['Notes']))
+        if(isset($_POST["Notes"]) && !empty($_POST['Notes']))
             ExecuteSQL("UPDATE ORDERS SET Notes=? WHERE Order_ID=?", array($_POST['Notes'], $_POST['ID']));
-        elseif(isset($_POST["Status"]) && !empty($_GET['Status']))
+        elseif(isset($_POST["Status"]) && !empty($_POST['Status']))
             ExecuteSQL("UPDATE ORDERS SET Order_Status=? WHERE Order_ID=?", array($_POST['Status'], $_POST['ID']));
 
         $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($_POST['ID']));
@@ -131,7 +129,7 @@ echo json_encode($data);
 if(isset($_POST["Redirect"]) && !empty($_POST["Redirect"]))
 {
     $redirect = $_POST["Redirect"];
-    //header("Location:$redirect");
+    header("Location:$redirect");
 }
 
 ?>
