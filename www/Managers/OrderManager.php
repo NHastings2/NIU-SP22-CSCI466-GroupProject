@@ -76,8 +76,7 @@ else if($method == "POST")
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                print("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID");
-                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
+                $storeItem = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
                 $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
                 print($newStock);
