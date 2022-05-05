@@ -19,9 +19,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
-        $data = ExecuteSQL("SELECT * FROM PRODUCT WHERE Product_ID = ?", array($_GET['ID']));
+        $data = ExecuteSQL("SELECT * FROM PRODUCT WHERE Product_ID = ? ORDER BY Product_Name ASC", array($_GET['ID']));
     else
-        $data = ExecuteSQL("SELECT * FROM PRODUCT");
+        $data = ExecuteSQL("SELECT * FROM PRODUCT ORDER BY Product_Name ASC");
 }
 elseif($method == "POST")
 {
