@@ -7,7 +7,7 @@ $cart = GetCart();
 $json = json_decode($cart, true);
 
 if (!empty($json)) {
-    echo "<table border bordercolor=\"white\"><tr><th>Name</th><th>Quantity Ordered</th><th>Price</th><th>Product Page</th><th>Update Product Count</th><th>Remove product</th></tr>";
+    echo "<table border bordercolor=\"white\"><tr><th>Name</th><th>Quantity Ordered</th><th>Price</th><th>Item Page</th><th>Update Product Count</th><th>Remove product</th></tr>";
     $totalCost = 0;
     foreach ($json as $key => $value) {
         $item = GetInventoryItemByID($value["productID"]);
@@ -18,7 +18,7 @@ if (!empty($json)) {
                 echo "<tr><td>{$itemValue["Product_Name"]}</td>
                         <td>{$value["quantity"]}</td>
                         <td>\${$itemValue["Product_Cost"]}</td>
-                        <td><a href=\"Item.php?ID={$itemValue["Product_ID"]}\">Product page</a></td>
+                        <td><a href=\"Item.php?ID={$itemValue["Product_ID"]}\">Item page</a></td>
                         <td><form method=\"POST\" action=\"./Managers/CartManager.php\">
                                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                                 <input type=\"hidden\" name=\"ProductID\" value=\"{$itemValue["Product_ID"]}\"/>
