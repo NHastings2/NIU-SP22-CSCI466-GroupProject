@@ -1,6 +1,6 @@
 <html><head><title>Game Shop Order</title></head><body style="background-color:black; color:white;"><?php
 
-include "Libraries/Inventory.php";
+include "Libraries/Order.php";
 
 $item = GetOrderByID($_GET["ID"]);
 $json = json_decode($item, true);
