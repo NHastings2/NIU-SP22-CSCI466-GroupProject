@@ -42,6 +42,8 @@ if (!empty($json)) {
             <input type=\"number\" name=\"CustomerID\" placeholder=\"Customer ID\"/>
             <input type=\"submit\" value=\"Order!\"/>
             <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
+} else {
+    echo "You have no items in your cart!"
 }
 
 ?></body></html>

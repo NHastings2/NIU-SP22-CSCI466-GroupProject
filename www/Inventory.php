@@ -14,6 +14,8 @@ if (!empty($json)) {
                 <td><a href=\"Item.php?ID={$value["Product_ID"]}\">Product page</a></td></tr>";
     }
     echo "</table>";
+} else {
+    echo "The inventory is empty!"
 }
 
 ?></body></html>

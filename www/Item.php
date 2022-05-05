@@ -19,6 +19,8 @@ if (!empty($json)) {
                 <input type=\"submit\" value=\"Add to Cart!\"/>
                 <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
     }
+} else {
+    echo "That item does not exist!"
 }
 
 ?></body></html>
