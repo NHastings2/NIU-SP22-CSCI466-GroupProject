@@ -1,6 +1,6 @@
 <html><head><title>Game Shop</title></head><body style="background-color:black; color:white;"><?php
 
-include "Libraries/Inventory.php"
+include "Libraries/Inventory.php";
 include "Libraries/Cart.php";
 
 $cart = GetCart();
