@@ -2,8 +2,8 @@
 
 include "Libraries/Inventory.php";
 
-$inventory = GetInventoryItemByID($_GET["ID"]);
-$json = json_decode($inventory, true);
+$item = GetInventoryItemByID($_GET["ID"]);
+$json = json_decode($item, true);
 
 if (!empty($json)) {
     foreach ($json as $key => $value) {
@@ -15,8 +15,9 @@ if (!empty($json)) {
         echo "<br/><br/>Quantity:<form method=\"POST\" action=\"./Managers/CartManager.php\">
                 <input type=\"hidden\" name=\"Action\" value=\"Add\"/>
                 <input type=\"hidden\" name=\"ProductID\" value=\"{$value["Product_ID"]}\"/>
-                <input type=\"number\" name=\"Quantity\" placeholder=\"Quantity\" min=\"1\"/>
-                <input type=\"submit\" value=\"Order!\"/></form>";
+                <input type=\"number\" name=\"Quantity\" placeholder=\"Quantity\" min=\"1\" max=\"{$value["Product_in_Stock"]}\"/>
+                <input type=\"submit\" value=\"Add to Cart!\"/>
+                <input type=\"hidden\" name=\"Redirect\" value=\"/Cart.php\"/></form>";
     }
 }
 
