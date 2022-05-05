@@ -3,6 +3,7 @@
 include "Libraries/Inventory.php";
 
 $inventory = GetInventoryItems();
+print_r($inventory);
 $json = json_decode($inventory, true);
 
 if (!empty($json)) {
