@@ -81,7 +81,7 @@ else if($method == "POST")
                 $newStock = $storeItem['Prodoct_in_Stock'] - $item['quantity'];
                 print($newStock);
                 $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
-                GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData);
+                GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
 
                 $Order_Total += ($storeItem["Product_Cost"] * $item["quantity"]);
                 print($Order_Total);
