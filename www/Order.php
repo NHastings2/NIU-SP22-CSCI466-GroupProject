@@ -23,7 +23,7 @@ if (!empty($json)) {
         }
         echo "</table>";
         echo "<br/><br/>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
-                <input type=\"hidden\" name=\"ID\" value=\"{$value["Order_ID"]}\"
+                <input type=\"hidden\" name=\"ID\" value=\"{$value["Order_ID"]}\"/>
                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                 <select name=\"Status\"><option value=\"Purchased\">Purchased</option><option value=\"Shipped\">Shipped</option></select>
                 <input type=\"submit\" value=\"Update status\"/>
