@@ -76,9 +76,8 @@ else if($method == "POST")
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                $storeItems = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
+                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
-                foreach ($storeItems as $iKey => $storeItem) {
                     $newStock = $storeItem['Product_in_Stock'] - $item['quantity'];
                     print($newStock);
                     $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
@@ -86,7 +85,6 @@ else if($method == "POST")
 
                     $Order_Total += ($storeItem["Product_Cost"] * $item["quantity"]);
                     print($Order_Total);
-                }
             }
 
             $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
