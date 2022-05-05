@@ -85,6 +85,8 @@ else if($method == "POST")
                 ExecuteSQL("INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)", array($orderID, $item['productID'], $item['quantity']));
             }
 
+            
+
             $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($orderID));
         }
         else 
