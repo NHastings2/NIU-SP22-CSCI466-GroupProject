@@ -1,6 +1,6 @@
 <html><head><title>Game Shop</title></head><body style="background-color:black; color:white;"><?php
 
-include "Libraries/Inventory.php";
+include "Libraries/Cart.php";
 
 $cart = GetCart();
 $json = json_decode($cart, true);
@@ -40,7 +40,7 @@ if (!empty($json)) {
             <input type=\"text\" name=\"ShippingAddress\" placeholder=\"Shipping address\"/>
             <input type=\"number\" name=\"CustomerID\" placeholder=\"Customer ID\"/>
             <input type=\"submit\" value=\"Order!\"/>
-            <input type=\"hidden\" name=\"Redirect\" value=\"Cart.php\"/></form>";
+            <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
 }
 
 ?></body></html>
