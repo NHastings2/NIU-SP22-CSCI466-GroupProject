@@ -39,7 +39,8 @@ if (!empty($json)) {
             <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 digits of your credit card\"/>
             <input type=\"text\" name=\"ShippingAddress\" placeholder=\"Shipping address\"/>
             <input type=\"number\" name=\"CustomerID\" placeholder=\"Customer ID\"/>
-            <input type=\"submit\" value=\"Order!\"</form>";
+            <input type=\"submit\" value=\"Order!\"/>
+            <input type=\"hidden\" name=\"Redirect\" value=\"Cart.php\"/></form>";
 }
 
 ?></body></html>
