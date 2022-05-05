@@ -7,14 +7,14 @@ $json = json_decode($item, true);
 
 if (!empty($json)) {
     foreach ($json as $key => $value) {
-        echo "<h>Order number {$value["Order_ID"]}</h>
-                <p>Ordered on {$value["Order_Date"]}</p>
-                <p>Ship to {$value["Shipping_Address"]}</p>
-                <p>Tracking number: {$value["Tracking_Num"]}</p>
-                <p>Order status: {$value["Order_Status"]}</p>
-                <p>Total Cost: {$value["Total_Cost"]}</p>
-                <p>Notes: {$value["Notes"]}</p>
-                <p>Customer ID: {$value["Customer_ID"]}</p>";
+        echo "<table><tr><td>Order number</td><td>{$value["Order_ID"]}</td>
+                <tr><td>Ordered on</td><td>{$value["Order_Date"]}</td>
+                <tr><td>Ship to</td><td>{$value["Shipping_Address"]}</td></tr>
+                <tr><td>Tracking number</td><td>{$value["Tracking_Num"]}</td></tr>
+                <tr><td>Order status</td><td>{$value["Order_Status"]}</td></tr>
+                <tr><td>Total Cost</td><td>{$value["Total_Cost"]}</td></tr>
+                <tr><td>Notes</td><td>{$value["Notes"]}</td></tr>
+                <tr><td>Customer ID</td><td>{$value["Customer_ID"]}</td></tr>";
         echo "<table border bordercolor=\"white\"><th>Item ID</th><th>Quantity</th><th>Item Page</th>";
         foreach ($value["Order_Items"] as $itemKey => $itemValue) {
             echo "<tr><td>{$itemValue["ProductID"]}</td>
