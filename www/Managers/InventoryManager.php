@@ -1,6 +1,6 @@
 <?php
 
-include "/home/data/www/$USER/php.inc/secrets.php";
+include "/home/data/www/z1929228/php.inc/secrets.php";
 include 'functions.php';
 $dbname = 'z1929228';
 
@@ -19,9 +19,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
-        $data = ExecuteSQL("SELECT * FROM PRODUCT WHERE Product_ID = ?", array($_GET['ID']));
+        $data = ExecuteSQL("SELECT * FROM PRODUCT WHERE Product_ID = ? ORDER BY Product_Name ASC", array($_GET['ID']));
     else
-        $data = ExecuteSQL("SELECT * FROM PRODUCT");
+        $data = ExecuteSQL("SELECT * FROM PRODUCT ORDER BY Product_Name ASC");
 }
 elseif($method == "POST")
 {
