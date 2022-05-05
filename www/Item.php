@@ -8,7 +8,7 @@ $json = json_decode($item, true);
 if (!empty($json)) {
     foreach ($json as $key => $value) {
         echo "<title>Game Shop {$value["Product_Name"]}</title></head><body style=\"background-color:black; color:white;\">";
-        echo "<h>{$value["Product_Name"]}</h>
+        echo "<h1>{$value["Product_Name"]}</h1>
                 <p>This item costs \${$value["Product_Cost"]}</p>
                 <p>We currently have {$value["Product_in_Stock"]} of this item in stock</p>
                 <p>Item ID: {$value["Product_ID"]}</p>";
