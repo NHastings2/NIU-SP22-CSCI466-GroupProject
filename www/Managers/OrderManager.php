@@ -34,6 +34,11 @@ if($method == "GET")
     {
         $orderItems = array();
         $orderQuery = ExecuteSQL("SELECT * FROM ORDER_PRODUCTS WHERE Order_ID = ?", array($order['Order_ID']));
+        if($order['Status'] == 'P')
+            $orders[$orderKey][$order] = "Purchased";
+        else 
+            $orders[$orderKey][$order] = "Shipped";
+
         foreach ($orderQuery as $itemKey => $orderItem) 
         {
             array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']));
