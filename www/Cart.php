@@ -18,7 +18,7 @@ if (!empty($json)) {
                 echo "<tr><td>{$itemValue["Product_Name"]}</td>
                         <td>{$value["quantity"]}</td>
                         <td>\${$itemValue["Product_Cost"]}</td>
-                        <td><a href=\"Item.php?ID={$value["Product_ID"]}\">Product page</a></td>
+                        <td><a href=\"Item.php?ID={$itemValue["Product_ID"]}\">Product page</a></td>
                         <td><form method=\"POST\" action=\"./Managers/CartManager.php\">
                                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                                 <input type=\"hidden\" name=\"ProductID\" value=\"{$itemValue["Product_ID"]}\"/>
@@ -37,7 +37,7 @@ if (!empty($json)) {
     echo "</table>";
     echo "Your current order will cost \$$totalCost<form method=\"POST\" action=\"./Managers/OrderManager.php\">
             <input type=\"hidden\" name=\"Action\" value=\"Create\"/>
-            <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 digits of your credit card\"/>
+            <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 CC digits\"/>
             <input type=\"text\" name=\"ShippingAddress\" placeholder=\"Shipping address\"/>
             <input type=\"number\" name=\"CustomerID\" placeholder=\"Customer ID\"/>
             <input type=\"submit\" value=\"Order!\"/>
