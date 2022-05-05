@@ -9,7 +9,7 @@ if (!empty($json)) {
     foreach ($json as $key => $value) {
         echo "<title>Game Shop {$value["Product_Name"]}</title></head><body style=\"background-color:black; color:white;\">";
         echo "<h>{$value["Product_Name"]}</h>
-                <p>This product costs {$value["Product_Cost"]}</p>
+                <p>This product costs \${$value["Product_Cost"]}</p>
                 <p>We currently have {$value["Product_in_Stock"]} of this product in stock</p>
                 <p>Product ID: {$value["Product_ID"]}</p>";
         echo "<br/><br/>Quantity:<form method=\"POST\" action=\"./Managers/CartManager.php\">
