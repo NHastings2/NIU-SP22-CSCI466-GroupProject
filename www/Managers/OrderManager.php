@@ -19,15 +19,15 @@ if($method == "GET")
     $orders = "";
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY Order_Date DESC", array($_GET["ID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY Order_Status, Order_Date DESC", array($_GET["ID"]));
     }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC", array($_GET["CustomerID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Status, Order_Date DESC", array($_GET["CustomerID"]));
     }
     else
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS ORDER BY Order_Date DESC");
+        $orders = ExecuteSQL("SELECT * FROM ORDERS ORDER BY Order_Status, Order_Date DESC");
     }
 
     foreach ($orders as $orderKey => $order) 
@@ -78,19 +78,19 @@ else if($method == "POST")
                 $itemID = $item["productID"];
                 $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
-                    $newStock = $storeItem['Product_in_Stock'] - $item['quantity'];
+                    $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
                     print($newStock);
                     $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
                     GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
 
-                    $Order_Total += ($storeItem["Product_Cost"] * $item["quantity"]);
+                    $Order_Total += ($storeItem[0]["Product_Cost"] * $item["quantity"]);
                     print($Order_Total);
             }
 
             $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
             ExecuteSQL("INSERT INTO ORDERS (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);", $queryData);
 
-            $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;", array($Customer_ID));  
+            $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_ID DESC LIMIT 1;", array($Customer_ID));  
 
             $orderID = $orderData[0]['Order_ID'];
             foreach ($currentCart as $key => $item) {
