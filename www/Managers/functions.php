@@ -44,7 +44,7 @@ function GetData(string $URL, string $method, array $cookies=NULL, array $postPa
 
 function ExecuteSQL(string $Command, array $data=array())
 {
-    include "/home/data/www/$USER/php.inc/secrets.php";
+    include "/home/data/www/z1929228/php.inc/secrets.php";
     $dbname = 'z1929228';
 
     try {
