@@ -24,12 +24,12 @@ if (!empty($json)) {
                                 <input type=\"hidden\" name=\"ProductID\" value=\"{$itemValue["Product_ID"]}\"/>
                                 <input type=\"number\" name=\"Quantity\" placeholder=\"Quantity\" min=\"1\" max=\"{$itemValue["Product_in_Stock"]}\"/>
                                 <input type=\"submit\" value=\"Change Order Amount\"/>
-                                <input type=\"hidden\" name=\"Redirect\" value=\"/Cart.php\"/></form></td>
+                                <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form></td>
                         <td><form method=\"POST\" action=\"./Managers/CartManager.php\">
                                 <input type=\"hidden\" name=\"Action\" value=\"Remove\"/>
                                 <input type=\"hidden\" name=\"ProductID\" value=\"{$itemValue["Product_ID"]}\"/>
                                 <input type=\"submit\" value=\"Remove From Cart\"/>
-                                <input type=\"hidden\" name=\"Redirect\" value=\"/Cart.php\"/></form></td></tr>";
+                                <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form></td></tr>";
                 $totalCost += $value["quantity"] * $itemValue["Product_Cost"];
             }
         }
