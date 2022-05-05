@@ -35,9 +35,9 @@ if($method == "GET")
         $orderItems = array();
         $orderQuery = ExecuteSQL("SELECT * FROM ORDER_PRODUCTS WHERE Order_ID = ?", array($order['Order_ID']));
         if($order['Status'] == 'P')
-            $orders[$orderKey][$order] = "Purchased";
+            $orders[$orderKey]['Status'] = "Purchased";
         else 
-            $orders[$orderKey][$order] = "Shipped";
+            $orders[$orderKey]['Status'] = "Shipped";
 
         foreach ($orderQuery as $itemKey => $orderItem) 
         {
