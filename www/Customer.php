@@ -22,7 +22,7 @@ if (!empty($json)) {
                     <td><a href=\"Order.php?ID={$orderValue["Order_ID"]}\">Order page</a></td></tr>";
             }
         } else {
-            echo "<p>This customer has no orders.</p>"
+            echo "<p>This customer has no orders.</p>";
         }
     }
 } else {
