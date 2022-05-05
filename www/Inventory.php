@@ -6,7 +6,7 @@ $inventory = GetInventoryItems();
 $json = json_decode($inventory, true);
 
 if (!empty($json)) {
-    echo "<table border style=\"color:white\"><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Product Page</th></tr>";
+    echo "<table border style=\"bordercolor=white;\"><tr><th>Name</th><th>Quantity</th><th>Price</th><th>Product Page</th></tr>";
     foreach ($json as $key => $value) {
         echo "<tr><td>{$value["Product_Name"]}</td>
                 <td>{$value["Product_in_Stock"]}</td>
