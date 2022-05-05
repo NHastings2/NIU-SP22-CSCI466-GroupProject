@@ -19,15 +19,15 @@ if($method == "GET")
     $orders = "";
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY Order_Date DESC", array($_GET["ID"]));
     }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC", array($_GET["CustomerID"]));
     }
     else
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS");
+        $orders = ExecuteSQL("SELECT * FROM ORDERS ORDER BY Order_Date DESC");
     }
 
     foreach ($orders as $orderKey => $order) 
