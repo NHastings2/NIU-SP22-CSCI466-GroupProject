@@ -2,8 +2,8 @@
 
 include "Libraries/Order.php";
 
-$item = GetOrderByID($_GET["ID"]);
-$json = json_decode($item, true);
+$order = GetOrderByID($_GET["ID"]);
+$json = json_decode($order, true);
 
 if (!empty($json)) {
     foreach ($json as $key => $value) {
@@ -26,6 +26,12 @@ if (!empty($json)) {
                 <input type=\"hidden\" name=\"ID\" value=\"{$value["Order_ID"]}\"/>
                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                 <select name=\"Status\"><option value=\"P\">Purchased</option><option value=\"S\">Shipped</option></select>
+                <input type=\"submit\" value=\"Update status\"/>
+                <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Order.php?ID={$_GET["ID"]}\"/></form>";
+        echo "<br/><br/>Update order notes:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
+                <input type=\"hidden\" name=\"ID\" value=\"{$value["Order_ID"]}\"/>
+                <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
+                <input type=\"text\" name=\"Notes\" placeholder=\"New note\">
                 <input type=\"submit\" value=\"Update status\"/>
                 <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Order.php?ID={$_GET["ID"]}\"/></form>";
     }
