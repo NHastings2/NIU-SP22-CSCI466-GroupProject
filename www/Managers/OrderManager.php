@@ -19,25 +19,31 @@ if($method == "GET")
     $orders = "";
     if(isset($_GET["ID"]) && !empty($_GET['ID']))
     {
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ?", array($_GET["ID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID = ? ORDER BY Order_Date DESC", array($_GET["ID"]));
     }
     elseif (isset($_GET["CustomerID"]) && !empty($_GET['CustomerID'])) 
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ?", array($_GET["CustomerID"]));
+        $orders = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC", array($_GET["CustomerID"]));
     }
     else
     { 
-        $orders = ExecuteSQL("SELECT * FROM ORDERS");
+        $orders = ExecuteSQL("SELECT * FROM ORDERS ORDER BY Order_Date DESC");
     }
 
     foreach ($orders as $orderKey => $order) 
     {
         $orderItems = array();
         $orderQuery = ExecuteSQL("SELECT * FROM ORDER_PRODUCTS WHERE Order_ID = ?", array($order['Order_ID']));
+
         foreach ($orderQuery as $itemKey => $orderItem) 
         {
             array_push($orderItems, array('ProductID' => $orderItem['Product_ID'], 'Quantity' => $orderItem['QTY']));
         }
+
+        if($order['Order_Status'] == 'P')
+            $orders[$orderKey]['Order_Status'] = "Purchased";
+        else 
+            $orders[$orderKey]['Order_Status'] = "Shipped";
 
         $orders[$orderKey]['Order_Items'] = $orderItems;
     }
@@ -65,12 +71,12 @@ else if($method == "POST")
         $Customer_ID = $_POST["CustomerID"];
 
         $Order_Total = 0;
-        $currentCart = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET"));
+        $currentCart = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET"), true);
         if(count($currentCart) > 0)
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"));
+                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
                 $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => ($storeItem['Prodoct_in_Stock'] - $item['quantity']));
                 GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData);
@@ -79,6 +85,7 @@ else if($method == "POST")
             }
 
             $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
+            print_r($queryData);
             ExecuteSQL("INSERT INTO ORDER (Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Customer_ID) VALUES (?,?,?,?,?,?,?);", $queryData);
 
             $orderData = ExecuteSQL("SELECT * FROM ORDERS WHERE Customer_ID = ? ORDER BY Order_Date DESC LIMIT 1;", array($Customer_ID));  
@@ -120,7 +127,7 @@ echo json_encode($data);
 if(isset($_POST["Redirect"]) && !empty($_POST["Redirect"]))
 {
     $redirect = $_POST["Redirect"];
-    header("Location:$redirect");
+    //header("Location:$redirect");
 }
 
 ?>
