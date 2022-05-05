@@ -1,4 +1,4 @@
-<html><head><title>NED Inventory</title></head><body><?php
+<html><head><title>NED Inventory</title></head><body style="background-color:grey;><?php
 
 include "Libraries/Inventory.php";
 
