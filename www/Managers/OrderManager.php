@@ -76,15 +76,17 @@ else if($method == "POST")
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
+                $storeItems = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
-                $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
-                print($newStock);
-                $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
-                GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
+                foreach ($storeItems as $iKey => $storeItem) {
+                    $newStock = $storeItem['Product_in_Stock'] - $item['quantity'];
+                    print($newStock);
+                    $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
+                    GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
 
-                $Order_Total += ($storeItem[0]["Product_Cost"] * $item["quantity"]);
-                print($Order_Total);
+                    $Order_Total += ($storeItem["Product_Cost"] * $item["quantity"]);
+                    print($Order_Total);
+                }
             }
 
             $queryData = array($orderDate, $CCNum, $ShippingAddress, $TrackingNum, $OrderStatus, $Order_Total, $Customer_ID);
