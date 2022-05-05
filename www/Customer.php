@@ -11,7 +11,7 @@ if (!empty($json)) {
         echo "<title>Game Shop {$value["Customer_Name"]}</title></head><body style=\"background-color:black; color:white;\">";
         echo "<h1>{$value["Customer_Name"]}</h1>";
         
-        $orders = GetOrdersByCustomerID($value["Customer_Name"]);
+        $orders = GetOrdersByCustomerID($value["Customer_ID"]);
         $ordersJson = json_decode($orders, true);
 
         if (!empty($ordersJson)) {
