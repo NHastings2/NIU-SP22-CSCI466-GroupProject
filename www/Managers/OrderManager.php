@@ -71,12 +71,12 @@ else if($method == "POST")
         $Customer_ID = $_POST["CustomerID"];
 
         $Order_Total = 0;
-        $currentCart = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET"));
+        $currentCart = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "GET"), true);
         if(count($currentCart) > 0)
         {
             foreach ($currentCart as $key => $item) {
                 $itemID = $item["productID"];
-                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"));
+                $storeItem = json_decode(GetData("https://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
                 $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => ($storeItem['Prodoct_in_Stock'] - $item['quantity']));
                 GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData);
