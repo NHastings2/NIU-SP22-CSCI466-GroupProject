@@ -17,9 +17,9 @@ if (!empty($json)) {
                 <p>Customer ID: {$value["Customer_ID"]}</p>";
         echo "<table><th>Item ID</th><th>Quantity</th><th>Item Page</th>";
         foreach ($value["Order_Items"] as $itemKey => $itemValue) {
-            echo "<tr><td>{$itemValue["productID"]}</td>
-                    <td>{$itemValue["quantity"]}</td>
-                    <td><a href=\"Item.php?ID={$itemValue["productID"]}\">Item page</a></td></tr>";
+            echo "<tr><td>{$itemValue["ProductID"]}</td>
+                    <td>{$itemValue["Quantity"]}</td>
+                    <td><a href=\"Item.php?ID={$itemValue["ProductID"]}\">Item page</a></td></tr>";
         }
         echo "</table>";
         echo "<br/><br/>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
