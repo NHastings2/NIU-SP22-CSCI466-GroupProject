@@ -26,7 +26,7 @@ if (!empty($json)) {
                     <td>{$orderValue["Total_Cost"]}</td>
                     <td>{$orderValue["Notes"]}</td>
                     <td><a href=\"Order.php?ID={$orderValue["Order_ID"]}\">Order page</a></td></tr>";
-                $totalCost += $value["Total_Cost"];
+                $totalCost += $orderValue["Total_Cost"];
             }
             echo "</table>";
         } else {
