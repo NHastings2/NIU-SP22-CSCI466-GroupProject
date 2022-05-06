@@ -127,7 +127,7 @@ echo json_encode($data);
 if(isset($_POST["Redirect"]) && !empty($_POST["Redirect"]))
 {
     $redirect = $_POST["Redirect"];
-    //header("Location:$redirect");
+    header("Location:$redirect");
 }
 
 ?>
