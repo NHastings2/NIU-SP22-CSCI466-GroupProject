@@ -4,7 +4,7 @@ include "Libraries/Inventory.php";
 include "Libraries/Cart.php";
 include "Libraries/Customer.php";
 
-echo "<a href=\".\">Back to home page</a>";
+echo "<a href=\".\">Back to home page</a><br/>";
 
 $cart = GetCart();
 $json = json_decode($cart, true);
