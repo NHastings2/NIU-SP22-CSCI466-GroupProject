@@ -13,7 +13,7 @@ if (!empty($json)) {
         echo "<tr><td>{$value["Product_Name"]}</td>
                 <td>{$value["Product_in_Stock"]}</td>
                 <td>\${$value["Product_Cost"]}</td>
-                <td><a href=\"Item.php?ID={$value["Product_ID"]}\">Item page</a></td></tr>";
+                <td><a href=\"Item.php?ID={$value["Product_ID"] style=\"color: white\"}\">Item page</a></td></tr>";
     }
     echo "</table>";
 } else {
