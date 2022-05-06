@@ -79,7 +79,7 @@ else if($method == "POST")
                 $storeItem = json_decode(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php?ID=$itemID", "GET"), true);
 
                 $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
-                $postData = array('Action' => 'Update', 'ID' => $itemID, 'Quantity' => $newStock);
+                $postData = array("Action" => "Update", "ID" => $itemID, "Quantity" => $newStock);
                 print_r($postData);
                 print(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData));
 
@@ -96,8 +96,8 @@ else if($method == "POST")
                 ExecuteSQL("INSERT INTO ORDER_PRODUCTS (Order_ID, Product_ID, QTY) VALUES (?,?,?)", array($orderID, $item['productID'], $item['quantity']));
             }
 
-            $postData = array('Action' => 'Clear');
-            GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData);
+            $postData = array("Action" => "Clear");
+            print(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData));
 
             $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($orderID));
         }
