@@ -49,7 +49,7 @@ if (!empty($json)) {
     
     if (!empty($customersJson)) {
         foreach ($customersJson as $customerKey => $customerValue) {
-            echo "<option value=\"{$customerValue["Customer_ID"]}\">{$customerValue["CustomerID"]}</option>";
+            echo "<option value=\"{$customerValue["Customer_ID"]}\">{$customerValue["Customer_ID"]}</option>";
         }
     }
 
