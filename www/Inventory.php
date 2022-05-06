@@ -2,7 +2,7 @@
 
 include "Libraries/Inventory.php";
 
-echo "<a href=\"..\">Back to home page</a>";
+echo "<a href=\".\">Back to home page</a>";
 
 $inventory = GetInventoryItems();
 $json = json_decode($inventory, true);
