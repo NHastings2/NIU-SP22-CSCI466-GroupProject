@@ -41,14 +41,14 @@ if (!empty($json)) {
             <input type=\"hidden\" name=\"Action\" value=\"Create\"/>
             <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 CC digits\" maxlength=\"4\"/>
             <input type=\"text\" name=\"ShippingAddress\" placeholder=\"Shipping address\"/>
-            <select name=\"CustomerID\" placeholder=\"Customer ID\">";
+            <select name=\"CustomerID\">";
     
     $customers = GetCustomers();
     $customersJson = json_decode($customers, true);
     
     if (!empty($customersJson)) {
         foreach ($customersJson as $customerKey => $customerValue) {
-            echo "<option value=\"{$customerValue["Customer_ID"]}\"/>";
+            echo "<option value=\"{$customerValue["Customer_ID"]}\">{$customerValue["CustomerID"]}</option>";
         }
     }
 
