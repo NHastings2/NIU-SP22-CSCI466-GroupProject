@@ -9,11 +9,11 @@ if(!function_exists('GetData'))
 
         if($method == "POST")
         {
-            curl_setopt($curl, CURLOPT_POST, true);  
+            curl_setopt($curl, CURLOPT_POST, true); 
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $Payload); 
         }
 
-        if(isset($Payload) && !empty($Payload))
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($Payload));
+        
 
         if(isset($_COOKIE['PHPSESSID']) && !empty($_COOKIE['PHPSESSID']))
         {

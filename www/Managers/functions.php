@@ -17,10 +17,11 @@ function GetData(string $URL, string $method, array $cookies=NULL, array $postPa
 
     if($method == "POST")
     {
-        curl_setopt($curl, CURLOPT_POST, true);
-        if(isset($postPayload) && !empty($postPayload))
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($postPayload));
+        curl_setopt($curl, CURLOPT_POST, true);     
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $postPayload); 
     }
+
+    
 
     if(isset($_COOKIE['PHPSESSID']) && !empty($_COOKIE['PHPSESSID']))
     {
