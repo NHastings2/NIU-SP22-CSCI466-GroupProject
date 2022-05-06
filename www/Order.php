@@ -14,7 +14,7 @@ if (!empty($json)) {
                 <tr><td>Ship to</td><td>{$value["Shipping_Address"]}</td></tr>
                 <tr><td>Tracking number</td><td>{$value["Tracking_Num"]}</td></tr>
                 <tr><td>Order status</td><td>{$value["Order_Status"]}</td></tr>
-                <tr><td>Total Cost</td><td>{$value["Total_Cost"]}</td></tr>
+                <tr><td>Total Cost</td><td>\${$value["Total_Cost"]}</td></tr>
                 <tr><td>Notes</td><td>{$value["Notes"]}</td></tr>
                 <tr><td>Customer ID</td><td>{$value["Customer_ID"]}</td></tr>
                 <tr><td>Customer Page</td><td><a href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer Page</a></td></tr>";

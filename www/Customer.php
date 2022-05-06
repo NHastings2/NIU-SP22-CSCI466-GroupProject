@@ -18,12 +18,12 @@ if (!empty($json)) {
 
         $totalCost = 0;
         if (!empty($ordersJson)) {
-            echo "<p>Orders:</p><table border bordercolor=\"white\">";
+            echo "<p>Orders:</p><table border bordercolor=\"white\"><tr><th>Order ID</th><th>Date ordered</th><th>Status</th><th>Cost</th><th>Notes</th><th>Order page</th></tr>";
             foreach ($ordersJson as $orderKey => $orderValue) {
                 echo "<tr><td>{$orderValue["Order_ID"]}</td>
                     <td>{$orderValue["Order_Date"]}</td>
                     <td>{$orderValue["Order_Status"]}</td>
-                    <td>{$orderValue["Total_Cost"]}</td>
+                    <td>\${$orderValue["Total_Cost"]}</td>
                     <td>{$orderValue["Notes"]}</td>
                     <td><a href=\"Order.php?ID={$orderValue["Order_ID"]}\">Order page</a></td></tr>";
                 $totalCost += $orderValue["Total_Cost"];
@@ -32,7 +32,7 @@ if (!empty($json)) {
         } else {
             echo "<p>This customer has no orders.</p>";
         }
-        echo "<p>The total cost for all orders is: \${$orderValue["Total_Cost"]}";
+        echo "<p>The total cost for all orders is: \$$totalCost";
     }
 } else {
     echo "That item does not exist!";
