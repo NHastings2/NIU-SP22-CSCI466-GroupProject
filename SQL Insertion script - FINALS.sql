@@ -29,7 +29,7 @@ INSERT INTO PRODUCT(Product_Name, Product_in_Stock, Product_Cost) VALUES
     ('Vault Boy Bobble Head', '20', '30.00');
 
 INSERT INTO ORDERS(Order_Date, CC_Num, Shipping_Address, Tracking_Num, Order_Status, Total_Cost, Notes, Customer_ID) VALUES
-    ("2022-03-27",'1234','32 Pipe Lane, Mushroom Kingdom', '098765', 'S','1310','Where did that guy his medical license?',1),
+    ("2022-03-27",'1234','32 Pipe Lane, Mushroom Kingdom', '098765', 'S','1280','Where did that guy his medical license?',1),
     ("2022-02-11",'2345','CLASSIFIED, K2-L, Galactic Federation', '123456','S','20', 'didnt say a word. bad ass', 2),
     ("2022-02-05",'3456','room 3, Celestial Resort, Celeste Mountain', '456788','S','80','girl boss shit. super nice', 3),
     ("2022-01-23",'4567','Diddy Kongs Treehouse, Donkey Kong Island', '458794','S','120','angry that we dont sell bananas', 4),
