@@ -2,7 +2,7 @@
 
 include "Libraries/Customer.php";
 
-echo "<a href=\"..\">Back to home page</a>";
+echo "<a href=\".\">Back to home page</a>";
 
 $customers = GetCustomers();
 $json = json_decode($customers, true);
