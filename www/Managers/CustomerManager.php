@@ -11,9 +11,9 @@ $method = $_SERVER['REQUEST_METHOD'];
 if($method == "GET")
 {
     if(isset($_GET['ID']) && !empty($_GET['ID']))
-        $data = ExecuteSQL("SELECT * FROM CUSTOMER WHERE Customer_ID = ?", array($_GET['ID']));
+        $data = ExecuteSQL("SELECT * FROM CUSTOMER WHERE Customer_ID = ? ORDER BY Customer_Name", array($_GET['ID']));
     else
-        $data = ExecuteSQL("SELECT * FROM CUSTOMER");
+        $data = ExecuteSQL("SELECT * FROM CUSTOMER ORDER BY Customer_Name");
 }
 elseif($method == "POST")
 {
