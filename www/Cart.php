@@ -39,10 +39,20 @@ if (!empty($json)) {
     echo "</table>";
     echo "<br/>Your current order will cost \$$totalCost<form method=\"POST\" action=\"./Managers/OrderManager.php\">
             <input type=\"hidden\" name=\"Action\" value=\"Create\"/>
-            <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 CC digits\"/>
+            <input type=\"number\" name=\"CC_Num\" placeholder=\"Last 4 CC digits\" maxlength=\"4\"/>
             <input type=\"text\" name=\"ShippingAddress\" placeholder=\"Shipping address\"/>
-            <input type=\"number\" name=\"CustomerID\" placeholder=\"Customer ID\"/>
-            <input type=\"submit\" value=\"Order!\"/>
+            <select name=\"CustomerID\" placeholder=\"Customer ID\">";
+    
+    $customers = GetCustomers();
+    $customersJson = json_decode($customers, true);
+    
+    if (!empty($customersJson)) {
+        foreach ($customersJson as $customerKey => $customerValue) {
+            echo "<option value=\"{$customerValue["Customer_ID"]}\"/>"
+        }
+    }
+
+    echo "</select><input type=\"submit\" value=\"Order!\"/>
             <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form>";
 } else {
     echo "You have no items in your cart!";
