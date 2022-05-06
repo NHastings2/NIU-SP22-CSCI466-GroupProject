@@ -16,7 +16,8 @@ if (!empty($json)) {
                 <tr><td>Order status</td><td>{$value["Order_Status"]}</td></tr>
                 <tr><td>Total Cost</td><td>{$value["Total_Cost"]}</td></tr>
                 <tr><td>Notes</td><td>{$value["Notes"]}</td></tr>
-                <tr><td>Customer ID</td><td>{$value["Customer_ID"]}</td></tr>";
+                <tr><td>Customer ID</td><td>{$value["Customer_ID"]}</td></tr>
+                <tr><td>Customer Page</td><td><a href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer Page</a></td></tr>";
         echo "</table><br><br><h3>Order Items</h3><table border bordercolor=\"white\"><th>Item ID</th><th>Quantity</th><th>Item Page</th>";
         foreach ($value["Order_Items"] as $itemKey => $itemValue) {
             echo "<tr><td>{$itemValue["ProductID"]}</td>
