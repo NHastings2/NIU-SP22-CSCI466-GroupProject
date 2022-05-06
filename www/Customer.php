@@ -3,6 +3,8 @@
 include "Libraries/Customer.php";
 include "Libraries/Order.php";
 
+echo "<a href=\"Customers.php\">Back to customers page</a>";
+
 $customer = GetCustomerByID($_GET["ID"]);
 $json = json_decode($customer, true);
 

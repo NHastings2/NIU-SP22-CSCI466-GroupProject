@@ -2,6 +2,8 @@
 
 include "Libraries/Order.php";
 
+echo "<a href=\"Orders.php\">Back to orders</a>";
+
 $order = GetOrderByID($_GET["ID"]);
 $json = json_decode($order, true);
 

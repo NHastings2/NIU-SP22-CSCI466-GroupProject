@@ -2,6 +2,8 @@
 
 include "Libraries/Inventory.php";
 
+echo "<a href=\"Inventory.php\">Back to inventory</a>";
+
 $item = GetInventoryItemByID($_GET["ID"]);
 $json = json_decode($item, true);
 

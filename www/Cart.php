@@ -3,6 +3,8 @@
 include "Libraries/Inventory.php";
 include "Libraries/Cart.php";
 
+echo "<a href=\"..\">Back to home page</a>";
+
 $cart = GetCart();
 $json = json_decode($cart, true);
 

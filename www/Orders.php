@@ -2,6 +2,8 @@
 
 include "Libraries/Order.php";
 
+echo "<a href=\"..\">Back to home page</a>";
+
 $orders = GetOrders();
 $json = json_decode($orders, true);
 
