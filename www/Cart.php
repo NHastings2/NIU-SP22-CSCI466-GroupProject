@@ -24,7 +24,7 @@ if (!empty($json)) {
                         <td><form method=\"POST\" action=\"./Managers/CartManager.php\">
                                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                                 <input type=\"hidden\" name=\"ProductID\" value=\"{$itemValue["Product_ID"]}\"/>
-                                <input type=\"number\" name=\"Quantity\" placeholder=\"Quantity\" min=\"1\" max=\"{$itemValue["Product_in_Stock"]}\"/>
+                                <input type=\"number\" name=\"Quantity\" placeholder=\"Qty\" min=\"1\" max=\"{$itemValue["Product_in_Stock"]}\"/>
                                 <input type=\"submit\" value=\"Change Order Amount\"/>
                                 <input type=\"hidden\" name=\"Redirect\" value=\"http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Cart.php\"/></form></td>
                         <td><form method=\"POST\" action=\"./Managers/CartManager.php\">
@@ -48,7 +48,7 @@ if (!empty($json)) {
     
     if (!empty($customersJson)) {
         foreach ($customersJson as $customerKey => $customerValue) {
-            echo "<option value=\"{$customerValue["Customer_ID"]}\"/>"
+            echo "<option value=\"{$customerValue["Customer_ID"]}\"/>";
         }
     }
 
