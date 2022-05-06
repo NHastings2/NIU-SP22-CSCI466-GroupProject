@@ -80,8 +80,7 @@ else if($method == "POST")
 
                 $newStock = $storeItem[0]['Product_in_Stock'] - $item['quantity'];
                 $postData = array("Action" => "Update", "ID" => $itemID, "Quantity" => $newStock);
-                print_r($postData);
-                print(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData));
+                GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/InventoryManager.php", "POST", null, $postData);
 
                 $Order_Total += ($storeItem[0]["Product_Cost"] * $item["quantity"]);
             }
@@ -97,7 +96,7 @@ else if($method == "POST")
             }
 
             $postData = array("Action" => "Clear");
-            print(GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData));
+            GetData("http://students.cs.niu.edu/~z1929228/csci466/group_project/www/Managers/CartManager.php", "POST", null, $postData);
 
             $data = ExecuteSQL("SELECT * FROM ORDERS WHERE Order_ID=?", array($orderID));
         }
