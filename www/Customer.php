@@ -3,7 +3,7 @@
 include "Libraries/Customer.php";
 include "Libraries/Order.php";
 
-echo "<a href=\"Customers.php\">Back to customers page</a>";
+echo "<a style=\"color:#ADD8E6\" href=\"Customers.php\">Back to customers page</a>";
 
 $customer = GetCustomerByID($_GET["ID"]);
 $json = json_decode($customer, true);
@@ -25,7 +25,7 @@ if (!empty($json)) {
                     <td>{$orderValue["Order_Status"]}</td>
                     <td>\${$orderValue["Total_Cost"]}</td>
                     <td>{$orderValue["Notes"]}</td>
-                    <td><a href=\"Order.php?ID={$orderValue["Order_ID"]}\">Order page</a></td></tr>";
+                    <td><a style=\"color:#ADD8E6\" href=\"Order.php?ID={$orderValue["Order_ID"]}\">Order page</a></td></tr>";
                 $totalCost += $orderValue["Total_Cost"];
             }
             echo "</table>";

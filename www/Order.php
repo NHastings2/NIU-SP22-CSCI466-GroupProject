@@ -17,12 +17,12 @@ if (!empty($json)) {
                 <tr><td>Total Cost</td><td>\${$value["Total_Cost"]}</td></tr>
                 <tr><td>Notes</td><td>{$value["Notes"]}</td></tr>
                 <tr><td>Customer ID</td><td>{$value["Customer_ID"]}</td></tr>
-                <tr><td>Customer Page</td><td><a href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer Page</a></td></tr>";
+                <tr><td>Customer Page</td><td><a style=\"color:#ADD8E6\" href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer Page</a></td></tr>";
         echo "</table><br><h3>Order Items</h3><table border bordercolor=\"white\"><th>Item ID</th><th>Quantity</th><th>Item Page</th>";
         foreach ($value["Order_Items"] as $itemKey => $itemValue) {
             echo "<tr><td>{$itemValue["ProductID"]}</td>
                     <td>{$itemValue["Quantity"]}</td>
-                    <td><a href=\"Item.php?ID={$itemValue["ProductID"]}\">Item page</a></td></tr>";
+                    <td><a style=\"color:#ADD8E6\" href=\"Item.php?ID={$itemValue["ProductID"]}\">Item page</a></td></tr>";
         }
         echo "</table>";
         echo "<br/></br>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">

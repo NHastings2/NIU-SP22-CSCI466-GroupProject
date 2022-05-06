@@ -2,7 +2,7 @@
 
 include "Libraries/Customer.php";
 
-echo "<a href=\".\">Back to home page</a>";
+echo "<a style=\"color:#ADD8E6\" href=\".\">Back to home page</a>";
 
 $customers = GetCustomers();
 $json = json_decode($customers, true);
@@ -12,7 +12,7 @@ if (!empty($json)) {
     foreach ($json as $key => $value) {
         echo "<tr><td>{$value["Customer_Name"]}</td>
                 <td>{$value["Customer_ID"]}</td>
-                <td><a href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer page</a></td></tr>";
+                <td><a style=\"color:#ADD8E6\" href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer page</a></td></tr>";
     }
     echo "</table>";
 } else {

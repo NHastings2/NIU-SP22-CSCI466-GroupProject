@@ -2,7 +2,7 @@
 
 include "Libraries/Order.php";
 
-echo "<a href=\".\">Back to home page</a>";
+echo "<a style=\"color:#ADD8E6\" href=\".\">Back to home page</a>";
 
 $orders = GetOrders();
 $json = json_decode($orders, true);
@@ -14,7 +14,7 @@ if (!empty($json)) {
                 <td>{$value["Order_Date"]}</td>
                 <td>{$value["Order_Status"]}</td>
                 <td>{$value["Notes"]}</td>
-                <td><a href=\"Order.php?ID={$value["Order_ID"]}\">Order page</a></td></tr>";
+                <td><a style=\"color:#ADD8E6\" href=\"Order.php?ID={$value["Order_ID"]}\">Order page</a></td></tr>";
     }
     echo "</table>";
 } else {

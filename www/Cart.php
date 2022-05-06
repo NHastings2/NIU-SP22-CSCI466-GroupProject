@@ -4,7 +4,7 @@ include "Libraries/Inventory.php";
 include "Libraries/Cart.php";
 include "Libraries/Customer.php";
 
-echo "<a href=\".\">Back to home page</a><br/>";
+echo "<a style=\"color:#ADD8E6\" href=\".\">Back to home page</a><br/>";
 
 $cart = GetCart();
 $json = json_decode($cart, true);
@@ -21,7 +21,7 @@ if (!empty($json)) {
                 echo "<tr><td>{$itemValue["Product_Name"]}</td>
                         <td>{$value["quantity"]}</td>
                         <td>\${$itemValue["Product_Cost"]}</td>
-                        <td><a href=\"Item.php?ID={$itemValue["Product_ID"]}\">Item page</a></td>
+                        <td><a style=\"color:#ADD8E6\" href=\"Item.php?ID={$itemValue["Product_ID"]}\">Item page</a></td>
                         <td><form method=\"POST\" action=\"./Managers/CartManager.php\">
                                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                                 <input type=\"hidden\" name=\"ProductID\" value=\"{$itemValue["Product_ID"]}\"/>
