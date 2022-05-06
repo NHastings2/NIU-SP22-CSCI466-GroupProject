@@ -18,14 +18,14 @@ if (!empty($json)) {
                 <tr><td>Notes</td><td>{$value["Notes"]}</td></tr>
                 <tr><td>Customer ID</td><td>{$value["Customer_ID"]}</td></tr>
                 <tr><td>Customer Page</td><td><a href=\"Customer.php?ID={$value["Customer_ID"]}\">Customer Page</a></td></tr>";
-        echo "</table><br><br><h3>Order Items</h3><table border bordercolor=\"white\"><th>Item ID</th><th>Quantity</th><th>Item Page</th>";
+        echo "</table><br><h3>Order Items</h3><table border bordercolor=\"white\"><th>Item ID</th><th>Quantity</th><th>Item Page</th>";
         foreach ($value["Order_Items"] as $itemKey => $itemValue) {
             echo "<tr><td>{$itemValue["ProductID"]}</td>
                     <td>{$itemValue["Quantity"]}</td>
                     <td><a href=\"Item.php?ID={$itemValue["ProductID"]}\">Item page</a></td></tr>";
         }
         echo "</table>";
-        echo "<br/>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
+        echo "<br/></br>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
                 <input type=\"hidden\" name=\"ID\" value=\"{$value["Order_ID"]}\"/>
                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                 <select name=\"Status\"><option value=\"P\">Purchased</option><option value=\"S\">Shipped</option></select>
