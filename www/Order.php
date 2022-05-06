@@ -2,14 +2,14 @@
 
 include "Libraries/Order.php";
 
-echo "<a href=\"Orders.php\">Back to orders</a>";
+echo "<a href=\"Orders.php\">Back to orders</a><br/>";
 
 $order = GetOrderByID($_GET["ID"]);
 $json = json_decode($order, true);
 
 if (!empty($json)) {
     foreach ($json as $key => $value) {
-        echo "<table border bordercolor=\"white\"><tr><td>Order number</td><td>{$value["Order_ID"]}</td>
+        echo "<h3>Order Details</h3><table border bordercolor=\"white\"><tr><td>Order number</td><td>{$value["Order_ID"]}</td>
                 <tr><td>Ordered on</td><td>{$value["Order_Date"]}</td>
                 <tr><td>Ship to</td><td>{$value["Shipping_Address"]}</td></tr>
                 <tr><td>Tracking number</td><td>{$value["Tracking_Num"]}</td></tr>
@@ -24,7 +24,7 @@ if (!empty($json)) {
                     <td><a href=\"Item.php?ID={$itemValue["ProductID"]}\">Item page</a></td></tr>";
         }
         echo "</table>";
-        echo "<br/><br/>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
+        echo "<br/>Update order status:<form method=\"POST\" action=\"./Managers/OrderManager.php\">
                 <input type=\"hidden\" name=\"ID\" value=\"{$value["Order_ID"]}\"/>
                 <input type=\"hidden\" name=\"Action\" value=\"Update\"/>
                 <select name=\"Status\"><option value=\"P\">Purchased</option><option value=\"S\">Shipped</option></select>
